@@ -1,0 +1,258 @@
+# sources.yaml: where every column of country_year comes from.
+#
+# One entry = one column. To add a column later, add one entry and run:
+#     python scripts/build_data.py
+#
+# Fields
+#   column        name in the database (units in the name)
+#   letter        M (Movement), O (Output), L (Life), E (Energy)
+#   description   plain meaning, used in docs and (Step 2) in the model's schema text
+#   unit          unit of every value
+#   aggregation   how a group (region, bloc) figure is made from its countries:
+#                   sum           add the countries up (totals)
+#                   pop_weighted  average where each country counts in proportion to its population
+#                   gdp_weighted  average where each country counts in proportion to its economy size
+#                   median        the middle country's value
+#   weight_note   why the rule is exact, or how it is imperfect
+#   source        owid (Our World in Data chart) or worldbank (World Bank data service)
+#   slug / code   the OWID chart name, or the World Bank indicator code
+#   original_id   the World Bank code behind an OWID chart, when there is one
+#   producer      who made the data originally (credit them)
+#   licence       licence of the original data
+#   caveat        aviation = add the "registered airlines, not airports" note in answers
+#   why_source    why this source was picked (for World Bank fallbacks and choices)
+#   checked       what the source page showed when checked by hand on 8 November 2026
+#                 (the build measures the real years from the data every time)
+#   value_column  optional: the CSV column to use if a file holds more than one value column
+
+version: 1
+checked_on: 2026-11-08
+
+columns:
+
+  # ======================= M: MOVEMENT =======================
+  - column: air_passengers
+    letter: M
+    description: Passengers carried by airlines registered in the country, on domestic and international flights
+    unit: passengers
+    aggregation: sum
+    weight_note: A total, so group figures are a plain sum.
+    source: owid
+    slug: air-passengers-carried
+    original_id: IS.AIR.PSGR
+    producer: International Civil Aviation Organization (ICAO), via World Bank
+    licence: CC BY 4.0
+    caveat: aviation
+    checked: {range: "1970-2023", next_update: "January 2027"}
+
+  - column: air_departures
+    letter: M
+    description: Take-offs by airlines registered in the country, at home and abroad
+    unit: departures
+    aggregation: sum
+    weight_note: A total, so group figures are a plain sum.
+    source: worldbank
+    code: IS.AIR.DPRT
+    producer: International Civil Aviation Organization (ICAO), via World Bank
+    licence: CC BY 4.0
+    caveat: aviation
+    why_source: OWID has no chart for this series, so the World Bank data service is used (decision E-03).
+    checked: {range: "1970-2023"}
+
+  - column: air_freight_mtkm
+    letter: M
+    description: Air freight carried by airlines registered in the country, in million tonne-kilometres (one tonne flown one kilometre)
+    unit: million tonne-km
+    aggregation: sum
+    weight_note: A total, so group figures are a plain sum.
+    source: owid
+    slug: air-transport-freight-ton-km
+    original_id: IS.AIR.GOOD.MT.K1
+    producer: International Civil Aviation Organization (ICAO), via World Bank
+    licence: CC BY 4.0
+    caveat: aviation
+    checked: {range: "1970-2023"}
+
+  - column: internet_users_pct
+    letter: M
+    description: Share of the population who used the internet in the last three months
+    unit: "% of population"
+    aggregation: pop_weighted
+    weight_note: Exact. The share is of the population, so weighting by population gives the true group share.
+    source: owid
+    slug: share-of-individuals-using-the-internet
+    original_id: IT.NET.USER.ZS
+    producer: International Telecommunication Union (ITU), via World Bank
+    licence: CC BY 4.0
+    checked: {range: "1990-2025"}
+
+  - column: mobile_subs_per_100
+    letter: M
+    description: Mobile phone subscriptions per 100 people (can pass 100 when people hold more than one)
+    unit: subscriptions per 100 people
+    aggregation: pop_weighted
+    weight_note: Exact. The rate is per person, so weighting by population gives the true group rate.
+    source: owid
+    slug: mobile-cellular-subscriptions-per-100-people
+    original_id: IT.CEL.SETS.P2
+    producer: International Telecommunication Union (ITU), via World Bank
+    licence: CC BY 4.0
+    checked: {range: "1960-2025"}
+
+  # ======================= O: OUTPUT =======================
+  - column: gdp_per_capita_ppp
+    letter: O
+    description: Average economic output per person, adjusted for inflation and for living costs between countries (PPP)
+    unit: international-$ (2021 prices)
+    aggregation: pop_weighted
+    weight_note: Exact. Weighting GDP per person by population gives the group's GDP divided by its people.
+    source: owid
+    slug: gdp-per-capita-worldbank
+    original_id: NY.GDP.PCAP.PP.KD
+    producer: World Bank (International Comparison Program), Eurostat, OECD, IMF
+    licence: CC BY 4.0
+    why_source: PPP in constant 2021 international dollars compares fairly across countries and across years (decision E-35).
+    checked: {range: "1990-2024"}
+
+  - column: gdp_growth_pct
+    letter: O
+    description: Yearly growth of the economy (real GDP, at constant prices)
+    unit: "% per year"
+    aggregation: gdp_weighted
+    weight_note: Bigger economies count more, using GDP (PPP) = gdp_per_capita_ppp x population as the weight, the way the IMF builds regional growth. A population weight would let a large poor country swamp a region's growth rate.
+    source: worldbank
+    code: NY.GDP.MKTP.KD.ZG
+    producer: World Bank and OECD national accounts data
+    licence: CC BY 4.0
+    why_source: OWID's own GDP growth chart comes from the UN SDG database and only covers 2000-2023; the World Bank series runs from 1961 (decision E-37). The World Bank also builds its own regional growth as a GDP-weighted average.
+    checked: {range: "1961-2024 (February 2026 edition)"}
+
+  - column: inflation_cpi_pct
+    letter: O
+    description: Yearly change in consumer prices (CPI inflation)
+    unit: "% per year"
+    aggregation: median
+    weight_note: The middle country's value, the same method the World Bank uses for this indicator. An average would let one hyperinflation (hundreds or thousands of percent in a year) swamp a whole region.
+    source: owid
+    slug: inflation-of-consumer-prices
+    original_id: FP.CPI.TOTL.ZG
+    producer: International Monetary Fund (IMF) International Financial Statistics, via World Bank
+    licence: CC BY 4.0
+    checked: {range: "1960-2025"}
+
+  - column: unemployment_pct
+    letter: O
+    description: Share of the labour force without work but available and looking for work (ILO modelled estimates)
+    unit: "% of labour force"
+    aggregation: pop_weighted
+    weight_note: Approximate. The true weight is the labour force, which this table does not hold; population is the closest weight available. Many values are ILO model estimates, not survey results.
+    source: owid
+    slug: unemployment-rate
+    original_id: SL.UEM.TOTL.ZS
+    producer: International Labour Organization (ILO) modelled estimates, via World Bank
+    licence: CC BY 4.0
+    checked: {range: "1991-2025"}
+
+  # ======================= L: LIFE =======================
+  - column: life_expectancy_years
+    letter: L
+    description: Period life expectancy at birth (how long a baby would live at that year's death rates)
+    unit: years
+    aggregation: pop_weighted
+    weight_note: Approximate but standard. The exact group figure needs life tables; a population-weighted average is close.
+    source: owid
+    slug: life-expectancy
+    producer: UN World Population Prospects 2024 (from 1950; OWID uses older historical sources only before 1950)
+    licence: CC BY 3.0 IGO (UN WPP); OWID processing CC BY 4.0
+    checked: {range: "1543-2023", next_update: "October 2026"}
+
+  - column: under5_deaths_per_1000
+    letter: L
+    description: Deaths before age five per 1,000 live births (under-five mortality rate)
+    unit: deaths per 1,000 live births
+    aggregation: pop_weighted
+    weight_note: Approximate. The true weight is the number of births; population is the closest weight available.
+    source: worldbank
+    code: SH.DYN.MORT
+    producer: UN Inter-agency Group for Child Mortality Estimation (UNICEF, WHO, World Bank, UN DESA), via World Bank
+    licence: CC BY 4.0
+    why_source: OWID's child mortality charts give a share in %, and list the UN IGME source under a UNICEF copyright notice. The World Bank publishes the same estimates per 1,000 births under CC BY 4.0 (decision E-37).
+    checked: {range: "1960-2024"}
+
+  - column: health_spend_per_capita_ppp
+    letter: L
+    description: Current health spending per person (public and private), in PPP international dollars at current prices
+    unit: current international-$
+    aggregation: pop_weighted
+    weight_note: Exact. Weighting spending per person by population gives the group's spending divided by its people.
+    source: owid
+    slug: annual-healthcare-expenditure-per-capita
+    original_id: SH.XPD.CHEX.PP.CD
+    producer: WHO Global Health Expenditure Database, via World Bank
+    licence: CC BY 4.0
+    checked: {range: "2000-2024"}
+
+  - column: population
+    letter: L
+    description: Number of people living in the country (mid-year estimate)
+    unit: people
+    aggregation: sum
+    weight_note: A total, so group figures are a plain sum. Also the weight for every population-weighted average.
+    source: worldbank
+    code: SP.POP.TOTL
+    producer: World Bank estimates (based on UN World Population Prospects and national sources)
+    licence: CC BY 4.0
+    why_source: OWID's long-run population series switches to UN projections after 2023, but group averages need real estimates as weights for 2024 and 2025. The World Bank series gives estimates up to 2025 (decision E-37).
+    checked: {range: "1960-2025 (July 2026 edition)"}
+
+  - column: urban_pop_pct
+    letter: L
+    description: Share of people living in urban areas, as each country defines urban
+    unit: "% of population"
+    aggregation: pop_weighted
+    weight_note: Exact. The share is of the population, so weighting by population gives the true group share.
+    source: owid
+    slug: share-of-population-urban
+    original_id: SP.URB.TOTL.IN.ZS
+    producer: UN World Urbanization Prospects, via World Bank
+    licence: CC BY 4.0
+    checked: {range: "1960-2024"}
+
+  # ======================= E: ENERGY =======================
+  - column: electricity_access_pct
+    letter: E
+    description: Share of the population with access to electricity
+    unit: "% of population"
+    aggregation: pop_weighted
+    weight_note: Exact. The share is of the population, so weighting by population gives the true group share.
+    source: owid
+    slug: share-of-the-population-with-access-to-electricity
+    original_id: EG.ELC.ACCS.ZS
+    producer: World Bank (Sustainable Energy for All database)
+    licence: CC BY 4.0
+    checked: {range: "1990-2024 (newest edition seen)"}
+
+  - column: renewables_share_elec_pct
+    letter: E
+    description: Share of the country's electricity generated from renewables (hydro, solar, wind, bioenergy, geothermal, wave, tidal)
+    unit: "% of electricity generation"
+    aggregation: pop_weighted
+    weight_note: Approximate. The true weight is each country's electricity generation, which this table does not hold; population is used instead.
+    source: owid
+    slug: share-electricity-renewables
+    producer: Ember (from 2000) and Energy Institute Statistical Review of World Energy (earlier years)
+    licence: "Ember: CC BY 4.0; Energy Institute: free to use with attribution"
+    why_source: Electricity, not primary energy (decision E-36). Ember reports electricity for over 200 countries up to 2025, which suits Nigeria and the peers.
+    checked: {range: "1985-2025"}
+
+  - column: co2_per_capita_t
+    letter: E
+    description: Carbon dioxide (CO2) from fossil fuels and industry per person (land-use change not included)
+    unit: tonnes per person
+    aggregation: pop_weighted
+    weight_note: Exact. Weighting emissions per person by population gives the group's emissions divided by its people.
+    source: owid
+    slug: co-emissions-per-capita
+    producer: Global Carbon Project (Global Carbon Budget), population from OWID
+    licence: CC BY 4.0
+    checked: {range: "1750-2024", next_update: "November 2026"}

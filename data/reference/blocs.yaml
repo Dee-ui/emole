@@ -1,0 +1,85 @@
+# blocs.yaml: membership lists for the true/false bloc columns in country_year.
+#
+# Rule for version 1 (decision E-41): CURRENT membership is applied to every year.
+# So "ECOWAS in 2010" uses today's 12 members, not the 15 of 2010. Emolé must say
+# "current members" in bloc answers. Historical membership could be added later.
+# Membership is counted, not suspension or attendance.
+#
+# Each list: ISO 3-letter codes, the date the list was checked, and where it came from.
+
+ecowas:
+  column: is_ecowas
+  name: Economic Community of West African States (ECOWAS)
+  as_of: 2026-11-08
+  count: 12
+  members: [BEN, CPV, CIV, GMB, GHA, GIN, GNB, LBR, NGA, SEN, SLE, TGO]
+  notes: >-
+    Burkina Faso (BFA), Mali (MLI) and Niger (NER) announced their exit in January 2024;
+    ECOWAS confirmed the withdrawal took effect on 29 January 2025 (with a six-month
+    transition period). Mauritania left in 2000. All four are NOT counted.
+  sources:
+    - https://www.myjoyonline.com/west-africa-bloc-ecowas-announces-formal-exit-of-three-junta-led-states/
+    - https://von.gov.ng/?p=386362
+
+african_union:
+  column: is_african_union
+  name: African Union (AU)
+  as_of: 2026-11-08
+  count: 55
+  members: [DZA, AGO, BEN, BWA, BFA, BDI, CPV, CMR, CAF, TCD, COM, COG, COD, CIV, DJI, EGY,
+            GNQ, ERI, SWZ, ETH, GAB, GMB, GHA, GIN, GNB, KEN, LSO, LBR, LBY, MDG, MWI, MLI,
+            MRT, MUS, MAR, MOZ, NAM, NER, NGA, RWA, ESH, STP, SEN, SYC, SLE, SOM, ZAF, SSD,
+            SDN, TZA, TGO, TUN, UGA, ZMB, ZWE]
+  notes: >-
+    55 members: every widely recognised African country plus the Sahrawi Arab Democratic
+    Republic (Western Sahara, ESH). Some members have been suspended at times (for example
+    after military takeovers); a suspension does not end membership, so they are counted.
+  sources:
+    - https://gna.org.gh/?p=305583
+    - https://ntlinternational.com/press/group-of-twenty-g20/
+
+eu:
+  column: is_eu
+  name: European Union (EU)
+  as_of: 2026-11-08
+  count: 27
+  members: [AUT, BEL, BGR, HRV, CYP, CZE, DNK, EST, FIN, FRA, DEU, GRC, HUN, IRL, ITA, LVA,
+            LTU, LUX, MLT, NLD, POL, PRT, ROU, SVK, SVN, ESP, SWE]
+  notes: >-
+    27 members since the United Kingdom left in 2020. No country has joined since Croatia
+    in 2013; Montenegro is the next expected member (accession treaty possibly in 2027).
+  sources:
+    - https://www.bluewin.ch/en/news/international/european-commission-montenegro-could-become-the-next-eu-member-state-li.3661303
+
+g20:
+  column: is_g20
+  name: Group of Twenty (G20), country members
+  as_of: 2026-11-08
+  count: 19
+  members: [ARG, AUS, BRA, CAN, CHN, FRA, DEU, IND, IDN, ITA, JPN, KOR, MEX, RUS, SAU, ZAF,
+            TUR, GBR, USA]
+  notes: >-
+    The G20 has 21 members: these 19 countries plus the European Union and the African
+    Union (a full member since 2023). The two unions are not countries, so they are not
+    rows here; ask about them through is_eu and is_african_union.
+  sources:
+    - https://ntlinternational.com/press/group-of-twenty-g20/
+    - https://geographyworlds.com/blog/g20-countries-list/
+
+middle_east:
+  column: is_middle_east
+  name: Middle East (Emolé's own definition)
+  as_of: 2026-11-08
+  count: 16
+  members: [BHR, EGY, IRN, IRQ, ISR, JOR, KWT, LBN, OMN, PSE, QAT, SAU, SYR, TUR, ARE, YEM]
+  notes: >-
+    No single official list exists (decision E-07). Emolé's list is the common core used
+    by most news and reference works: the Arabian Peninsula, the Levant, Iraq, Iran,
+    Turkiye and Egypt. Left out on purpose: Cyprus (an EU member, usually grouped with
+    Europe), Armenia, Azerbaijan and Georgia (UN "Western Asia" but usually called the
+    South Caucasus), and the Maghreb (Morocco, Algeria, Tunisia, Libya), which belong to
+    "Middle East and North Africa" but not to the Middle East itself. For other
+    definitions, ask for subregion = 'Western Asia' (UN) or the World Bank region in
+    wb_region (its exact current name is listed in DATA FACTS from Step 2).
+  sources:
+    - Emolé project decision E-07 (documented in docs/DATA.md)

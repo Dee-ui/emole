@@ -1,0 +1,134 @@
+{
+  "build_version": 1,
+  "built_at_utc": "2026-11-15T03:31:26+00:00",
+  "year_min": 1970,
+  "year_max": 2026,
+  "rows": 13328,
+  "countries": 238,
+  "first_year_in_table": 1970,
+  "last_year_in_table": 2025,
+  "python": "3.11.9",
+  "pandas": "2.3.3",
+  "duckdb": "1.4.5",
+  "sources": {
+    "air_passengers": {
+      "value_column": "is_air_psgr",
+      "file": "owid_air-passengers-carried__2026-11-15.csv",
+      "rows_kept": 7929,
+      "rows_outside_years": 0,
+      "download_date": "2026-11-15"
+    },
+    "air_departures": {
+      "file": "wb_IS.AIR.DPRT__2026-11-15.json",
+      "lastupdated": "2026-11-11",
+      "rows_kept": 7926,
+      "rows_outside_years": 0,
+      "download_date": "2026-11-15"
+    },
+    "air_freight_mtkm": {
+      "value_column": "is_air_good_mt_k1",
+      "file": "owid_air-transport-freight-ton-km__2026-11-15.csv",
+      "rows_kept": 7513,
+      "rows_outside_years": 0,
+      "download_date": "2026-11-15"
+    },
+    "internet_users_pct": {
+      "value_column": "it_net_user_zs",
+      "file": "owid_share-of-individuals-using-the-internet__2026-11-15.csv",
+      "rows_kept": 6224,
+      "rows_outside_years": 0,
+      "download_date": "2026-11-15"
+    },
+    "mobile_subs_per_100": {
+      "value_column": "it_cel_sets_p2",
+      "file": "owid_mobile-cellular-subscriptions-per-100-people__2026-11-15.csv",
+      "rows_kept": 8994,
+      "rows_outside_years": 0,
+      "download_date": "2026-11-15"
+    },
+    "gdp_per_capita_ppp": {
+      "value_column": "ny_gdp_pcap_pp_kd",
+      "file": "owid_gdp-per-capita-worldbank__2026-11-15.csv",
+      "rows_kept": 6977,
+      "rows_outside_years": 0,
+      "download_date": "2026-11-15"
+    },
+    "gdp_growth_pct": {
+      "file": "wb_NY.GDP.MKTP.KD.ZG__2026-11-15.json",
+      "lastupdated": "2026-11-11",
+      "rows_kept": 10382,
+      "rows_outside_years": 0,
+      "download_date": "2026-11-15"
+    },
+    "inflation_cpi_pct": {
+      "value_column": "fp_cpi_totl_zg",
+      "file": "owid_inflation-of-consumer-prices__2026-11-15.csv",
+      "rows_kept": 8380,
+      "rows_outside_years": 756,
+      "download_date": "2026-11-15"
+    },
+    "unemployment_pct": {
+      "value_column": "sl_uem_totl_zs",
+      "file": "owid_unemployment-rate__2026-11-15.csv",
+      "rows_kept": 6496,
+      "rows_outside_years": 0,
+      "download_date": "2026-11-15"
+    },
+    "life_expectancy_years": {
+      "value_column": "life_expectancy_0",
+      "file": "owid_life-expectancy__2026-11-15.csv",
+      "rows_kept": 12798,
+      "rows_outside_years": 6728,
+      "download_date": "2026-11-15"
+    },
+    "under5_deaths_per_1000": {
+      "file": "wb_SH.DYN.MORT__2026-11-15.json",
+      "lastupdated": "2026-11-11",
+      "rows_kept": 10449,
+      "rows_outside_years": 0,
+      "download_date": "2026-11-15"
+    },
+    "health_spend_per_capita_ppp": {
+      "value_column": "sh_xpd_chex_pp_cd",
+      "file": "owid_annual-healthcare-expenditure-per-capita__2026-11-15.csv",
+      "rows_kept": 4561,
+      "rows_outside_years": 0,
+      "download_date": "2026-11-15"
+    },
+    "population": {
+      "file": "wb_SP.POP.TOTL__2026-11-15.json",
+      "lastupdated": "2026-11-11",
+      "rows_kept": 12132,
+      "rows_outside_years": 0,
+      "download_date": "2026-11-15"
+    },
+    "urban_pop_pct": {
+      "value_column": "share__area_type_urban__data_type_estimates",
+      "file": "owid_share-of-population-urban__2026-11-15.csv",
+      "rows_kept": 13272,
+      "rows_outside_years": 4740,
+      "download_date": "2026-11-15"
+    },
+    "electricity_access_pct": {
+      "value_column": "eg_elc_accs_zs",
+      "file": "owid_share-of-the-population-with-access-to-electricity__2026-11-15.csv",
+      "rows_kept": 6712,
+      "rows_outside_years": 0,
+      "download_date": "2026-11-15"
+    },
+    "renewables_share_elec_pct": {
+      "value_column": "renewable_share_of_electricity__pct",
+      "file": "owid_share-electricity-renewables__2026-11-15.csv",
+      "rows_kept": 6382,
+      "rows_outside_years": 50,
+      "download_date": "2026-11-15"
+    },
+    "co2_per_capita_t": {
+      "value_column": "emissions_total_per_capita",
+      "file": "owid_co-emissions-per-capita__2026-11-15.csv",
+      "rows_kept": 11953,
+      "rows_outside_years": 11678,
+      "download_date": "2026-11-15"
+    }
+  }
+}
