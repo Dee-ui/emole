@@ -1,0 +1,49 @@
+# --- Python ---
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+build/
+dist/
+
+# --- Secrets (NEVER commit) ---
+.env
+.env.*
+!.env.example
+secrets/
+
+# --- Data: raw downloads are re-downloadable, so they stay out of Git ---
+data/raw/*
+!data/raw/.gitkeep
+# The database is rebuilt in seconds from the committed snapshot in data/processed/
+*.duckdb
+*.duckdb.tmp
+*.duckdb.wal
+
+# --- Website chats (from Step 4; contain answers) ---
+data/app.sqlite
+data/app.sqlite-*
+
+# --- Voice (from Step 4): downloaded models, recordings, previews ---
+models/
+voice/
+web/static/vendor/
+
+# --- Generated outputs ---
+charts/
+mlruns/
+mlflow.db
+logs/
+*.log
+
+# --- Operating system and editor files ---
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/*
+!.vscode/settings.json
+.idea/

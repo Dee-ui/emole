@@ -1,0 +1,11 @@
+# Store text files with LF line endings in Git, whatever the computer.
+# Without this, Windows (CRLF) and Linux (LF) copies make every line look "changed".
+* text=auto eol=lf
+
+# Binary files: never touch them.
+*.parquet binary
+*.duckdb binary
+*.png binary
+*.jpg binary
+*.wav binary
+*.zip binary
