@@ -1,0 +1,54 @@
+# A small sources list for the tests. Same format as data/sources.yaml.
+version: 1
+columns:
+  - column: air_passengers
+    letter: M
+    description: test air passengers
+    unit: passengers
+    aggregation: sum
+    weight_note: total
+    source: owid
+    slug: test-air
+    producer: test fixture
+    licence: test only
+    caveat: aviation
+  - column: internet_users_pct
+    letter: M
+    description: test internet share
+    unit: "% of population"
+    aggregation: pop_weighted
+    weight_note: exact
+    source: owid
+    slug: test-internet
+    producer: test fixture
+    licence: test only
+  - column: gdp_per_capita_ppp
+    letter: O
+    description: test GDP per person
+    unit: international-$
+    aggregation: pop_weighted
+    weight_note: exact
+    source: owid
+    slug: test-gdp
+    producer: test fixture
+    licence: test only
+  - column: gdp_growth_pct
+    letter: O
+    description: test GDP growth
+    unit: "% per year"
+    aggregation: gdp_weighted
+    weight_note: gdp weights
+    source: worldbank
+    code: NY.GDP.MKTP.KD.ZG
+    producer: test fixture
+    licence: test only
+  - column: population
+    letter: L
+    description: test population
+    unit: people
+    aggregation: sum
+    weight_note: total
+    source: worldbank
+    code: SP.POP.TOTL
+    producer: test fixture
+    licence: test only

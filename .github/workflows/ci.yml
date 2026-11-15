@@ -1,0 +1,28 @@
+# ci.yml: automatic checks on a clean machine, on every push and pull request.
+# Step 1 version: secrets scan, code checks and the offline tests.
+# Step 3 adds the security suite; Step 5 adds the Docker build and health check.
+# No API keys are used here, and none are needed.
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install
+        run: pip install -r requirements.txt
+      - name: Secrets scan (every tracked file)
+        run: python scripts/check_no_secrets.py --all
+      - name: Code checks
+        run: ruff check .
+      - name: Tests (offline, small fixtures)
+        run: pytest

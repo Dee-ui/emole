@@ -1,0 +1,438 @@
+column,code,entity,rows,reason
+air_departures,AFE,Africa Eastern and Southern,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,AFW,Africa Western and Central,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,ARB,Arab World,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,CSS,Caribbean small states,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,CEB,Central Europe and the Baltics,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,EAR,Early-demographic dividend,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,EAS,East Asia & Pacific,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,TEA,East Asia & Pacific (IDA & IBRD countries),56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,EAP,East Asia & Pacific (excluding high income),56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,EMU,Euro area,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,ECS,Europe & Central Asia,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,TEC,Europe & Central Asia (IDA & IBRD countries),56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,ECA,Europe & Central Asia (excluding high income),56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,EUU,European Union,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,FCV,"Fragility, Conflict, and Violence (FCV) situations",56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,HPC,Heavily indebted poor countries (HIPC),56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,IBD,IBRD only,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,IBT,IDA & IBRD total,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,IDB,IDA blend,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,IDX,IDA only,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,IDA,IDA total,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,LTE,Late-demographic dividend,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,LCN,Latin America & Caribbean,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,LAC,Latin America & Caribbean (excluding high income),56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,TLA,Latin America & the Caribbean (IDA & IBRD countries),56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,LDC,Least developed countries: UN classification,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,LMY,Low & middle income,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,MEA,"Middle East, North Africa, Afghanistan & Pakistan",56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,TMN,"Middle East, North Africa, Afghanistan & Pakistan (IDA & IBRD)",56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,MNA,"Middle East, North Africa, Afghanistan & Pakistan (excluding high income)",56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,MIC,Middle income,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,NAC,North America,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,OED,OECD members,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,OSS,Other small states,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,PSS,Pacific island small states,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,PST,Post-demographic dividend,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,PRE,Pre-demographic dividend,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,SST,Small states,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,SAS,South Asia,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,TSA,South Asia (IDA & IBRD),56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,SSF,Sub-Saharan Africa,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,TSS,Sub-Saharan Africa (IDA & IBRD countries),56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,SSA,Sub-Saharan Africa (excluding high income),56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,WLD,World,56,World Bank aggregate (a group row with a 3-letter code)
+air_departures,,High income,56,blank code in World Bank file
+air_departures,,Low income,56,blank code in World Bank file
+air_departures,,Lower middle income,56,blank code in World Bank file
+air_departures,,Not classified,56,blank code in World Bank file
+air_departures,,Upper middle income,56,blank code in World Bank file
+air_freight_mtkm,OWID_EU27,European Union (27),54,"OWID_ code: OWID group or former country (World, USSR ...)"
+air_freight_mtkm,OWID_HIC,High-income countries,54,"OWID_ code: OWID group or former country (World, USSR ...)"
+air_freight_mtkm,OWID_LIC,Low-income countries,45,"OWID_ code: OWID group or former country (World, USSR ...)"
+air_freight_mtkm,OWID_LMC,Lower-middle-income countries,54,"OWID_ code: OWID group or former country (World, USSR ...)"
+air_freight_mtkm,OWID_UMC,Upper-middle-income countries,50,"OWID_ code: OWID group or former country (World, USSR ...)"
+air_freight_mtkm,OWID_WRL,World,51,"OWID_ code: OWID group or former country (World, USSR ...)"
+air_freight_mtkm,WB_EAP,East Asia and Pacific (WB),50,code is not 3 capital letters
+air_freight_mtkm,WB_ECA,Europe and Central Asia (WB),32,code is not 3 capital letters
+air_freight_mtkm,WB_LAC,Latin America and Caribbean (WB),54,code is not 3 capital letters
+air_freight_mtkm,WB_MENAP,"Middle East, North Africa, Afghanistan and Pakistan (WB)",54,code is not 3 capital letters
+air_freight_mtkm,WB_NA,North America (WB),54,code is not 3 capital letters
+air_freight_mtkm,WB_SA,South Asia (WB),54,code is not 3 capital letters
+air_freight_mtkm,WB_SSA,Sub-Saharan Africa (WB),54,code is not 3 capital letters
+air_passengers,OWID_EU27,European Union (27),54,"OWID_ code: OWID group or former country (World, USSR ...)"
+air_passengers,OWID_HIC,High-income countries,54,"OWID_ code: OWID group or former country (World, USSR ...)"
+air_passengers,OWID_LIC,Low-income countries,46,"OWID_ code: OWID group or former country (World, USSR ...)"
+air_passengers,OWID_LMC,Lower-middle-income countries,54,"OWID_ code: OWID group or former country (World, USSR ...)"
+air_passengers,OWID_UMC,Upper-middle-income countries,50,"OWID_ code: OWID group or former country (World, USSR ...)"
+air_passengers,OWID_WRL,World,53,"OWID_ code: OWID group or former country (World, USSR ...)"
+air_passengers,WB_EAP,East Asia and Pacific (WB),50,code is not 3 capital letters
+air_passengers,WB_ECA,Europe and Central Asia (WB),33,code is not 3 capital letters
+air_passengers,WB_LAC,Latin America and Caribbean (WB),54,code is not 3 capital letters
+air_passengers,WB_MENAP,"Middle East, North Africa, Afghanistan and Pakistan (WB)",54,code is not 3 capital letters
+air_passengers,WB_NA,North America (WB),54,code is not 3 capital letters
+air_passengers,WB_SA,South Asia (WB),54,code is not 3 capital letters
+air_passengers,WB_SSA,Sub-Saharan Africa (WB),54,code is not 3 capital letters
+co2_per_capita_t,OWID_AFR,Africa,142,"OWID_ code: OWID group or former country (World, USSR ...)"
+co2_per_capita_t,OWID_ASI,Asia,231,"OWID_ code: OWID group or former country (World, USSR ...)"
+co2_per_capita_t,OWID_EUR,Europe,231,"OWID_ code: OWID group or former country (World, USSR ...)"
+co2_per_capita_t,OWID_EU27,European Union (27),226,"OWID_ code: OWID group or former country (World, USSR ...)"
+co2_per_capita_t,OWID_HIC,High-income countries,231,"OWID_ code: OWID group or former country (World, USSR ...)"
+co2_per_capita_t,OWID_LIC,Low-income countries,117,"OWID_ code: OWID group or former country (World, USSR ...)"
+co2_per_capita_t,OWID_LMC,Lower-middle-income countries,231,"OWID_ code: OWID group or former country (World, USSR ...)"
+co2_per_capita_t,OWID_NAM,North America,227,"OWID_ code: OWID group or former country (World, USSR ...)"
+co2_per_capita_t,OWID_OCE,Oceania,231,"OWID_ code: OWID group or former country (World, USSR ...)"
+co2_per_capita_t,OWID_SAM,South America,182,"OWID_ code: OWID group or former country (World, USSR ...)"
+co2_per_capita_t,OWID_UMC,Upper-middle-income countries,176,"OWID_ code: OWID group or former country (World, USSR ...)"
+co2_per_capita_t,OWID_WRL,World,231,"OWID_ code: OWID group or former country (World, USSR ...)"
+co2_per_capita_t,,Asia (excl. China and India),231,"blank code: an OWID group row (region, income group, union)"
+co2_per_capita_t,,Europe (excl. EU-27),231,"blank code: an OWID group row (region, income group, union)"
+co2_per_capita_t,,Europe (excl. EU-28),231,"blank code: an OWID group row (region, income group, union)"
+co2_per_capita_t,,European Union (28),231,"blank code: an OWID group row (region, income group, union)"
+co2_per_capita_t,,North America (excl. USA),227,"blank code: an OWID group row (region, income group, union)"
+electricity_access_pct,OWID_CIS,Channel Islands,35,"OWID_ code: OWID group or former country (World, USSR ...)"
+electricity_access_pct,OWID_EU27,European Union (27),35,"OWID_ code: OWID group or former country (World, USSR ...)"
+electricity_access_pct,OWID_HIC,High-income countries,35,"OWID_ code: OWID group or former country (World, USSR ...)"
+electricity_access_pct,OWID_LIC,Low-income countries,25,"OWID_ code: OWID group or former country (World, USSR ...)"
+electricity_access_pct,OWID_LMC,Lower-middle-income countries,32,"OWID_ code: OWID group or former country (World, USSR ...)"
+electricity_access_pct,OWID_UMC,Upper-middle-income countries,25,"OWID_ code: OWID group or former country (World, USSR ...)"
+electricity_access_pct,OWID_WRL,World,27,"OWID_ code: OWID group or former country (World, USSR ...)"
+electricity_access_pct,WB_EAP,East Asia and Pacific (WB),25,code is not 3 capital letters
+electricity_access_pct,WB_ECA,Europe and Central Asia (WB),35,code is not 3 capital letters
+electricity_access_pct,WB_LAC,Latin America and Caribbean (WB),33,code is not 3 capital letters
+electricity_access_pct,WB_MENAP,"Middle East, North Africa, Afghanistan and Pakistan (WB)",25,code is not 3 capital letters
+electricity_access_pct,WB_NA,North America (WB),35,code is not 3 capital letters
+electricity_access_pct,WB_SA,South Asia (WB),32,code is not 3 capital letters
+electricity_access_pct,WB_SSA,Sub-Saharan Africa (WB),29,code is not 3 capital letters
+gdp_growth_pct,AFE,Africa Eastern and Southern,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,AFW,Africa Western and Central,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,ARB,Arab World,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,CSS,Caribbean small states,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,CEB,Central Europe and the Baltics,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,EAR,Early-demographic dividend,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,EAS,East Asia & Pacific,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,TEA,East Asia & Pacific (IDA & IBRD countries),56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,EAP,East Asia & Pacific (excluding high income),56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,EMU,Euro area,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,ECS,Europe & Central Asia,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,TEC,Europe & Central Asia (IDA & IBRD countries),56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,ECA,Europe & Central Asia (excluding high income),56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,EUU,European Union,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,FCV,"Fragility, Conflict, and Violence (FCV) situations",56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,HPC,Heavily indebted poor countries (HIPC),56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,IBD,IBRD only,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,IBT,IDA & IBRD total,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,IDB,IDA blend,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,IDX,IDA only,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,IDA,IDA total,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,LTE,Late-demographic dividend,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,LCN,Latin America & Caribbean,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,LAC,Latin America & Caribbean (excluding high income),56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,TLA,Latin America & the Caribbean (IDA & IBRD countries),56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,LDC,Least developed countries: UN classification,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,LMY,Low & middle income,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,MEA,"Middle East, North Africa, Afghanistan & Pakistan",56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,TMN,"Middle East, North Africa, Afghanistan & Pakistan (IDA & IBRD)",56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,MNA,"Middle East, North Africa, Afghanistan & Pakistan (excluding high income)",56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,MIC,Middle income,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,NAC,North America,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,OED,OECD members,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,OSS,Other small states,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,PSS,Pacific island small states,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,PST,Post-demographic dividend,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,PRE,Pre-demographic dividend,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,SST,Small states,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,SAS,South Asia,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,TSA,South Asia (IDA & IBRD),56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,SSF,Sub-Saharan Africa,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,TSS,Sub-Saharan Africa (IDA & IBRD countries),56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,SSA,Sub-Saharan Africa (excluding high income),56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,WLD,World,56,World Bank aggregate (a group row with a 3-letter code)
+gdp_growth_pct,,High income,56,blank code in World Bank file
+gdp_growth_pct,,Low income,56,blank code in World Bank file
+gdp_growth_pct,,Lower middle income,56,blank code in World Bank file
+gdp_growth_pct,,Not classified,56,blank code in World Bank file
+gdp_growth_pct,,Upper middle income,56,blank code in World Bank file
+gdp_per_capita_ppp,OWID_EU27,European Union (27),36,"OWID_ code: OWID group or former country (World, USSR ...)"
+gdp_per_capita_ppp,OWID_HIC,High-income countries,36,"OWID_ code: OWID group or former country (World, USSR ...)"
+gdp_per_capita_ppp,OWID_LIC,Low-income countries,36,"OWID_ code: OWID group or former country (World, USSR ...)"
+gdp_per_capita_ppp,OWID_LMC,Lower-middle-income countries,36,"OWID_ code: OWID group or former country (World, USSR ...)"
+gdp_per_capita_ppp,OWID_UMC,Upper-middle-income countries,36,"OWID_ code: OWID group or former country (World, USSR ...)"
+gdp_per_capita_ppp,OWID_WRL,World,36,"OWID_ code: OWID group or former country (World, USSR ...)"
+gdp_per_capita_ppp,WB_EAP,East Asia and Pacific (WB),36,code is not 3 capital letters
+gdp_per_capita_ppp,WB_ECA,Europe and Central Asia (WB),36,code is not 3 capital letters
+gdp_per_capita_ppp,WB_LAC,Latin America and Caribbean (WB),36,code is not 3 capital letters
+gdp_per_capita_ppp,WB_MENAP,"Middle East, North Africa, Afghanistan and Pakistan (WB)",36,code is not 3 capital letters
+gdp_per_capita_ppp,WB_NA,North America (WB),36,code is not 3 capital letters
+gdp_per_capita_ppp,WB_SA,South Asia (WB),36,code is not 3 capital letters
+gdp_per_capita_ppp,WB_SSA,Sub-Saharan Africa (WB),36,code is not 3 capital letters
+health_spend_per_capita_ppp,OWID_EU27,European Union (27),25,"OWID_ code: OWID group or former country (World, USSR ...)"
+health_spend_per_capita_ppp,OWID_HIC,High-income countries,24,"OWID_ code: OWID group or former country (World, USSR ...)"
+health_spend_per_capita_ppp,OWID_LIC,Low-income countries,24,"OWID_ code: OWID group or former country (World, USSR ...)"
+health_spend_per_capita_ppp,OWID_LMC,Lower-middle-income countries,24,"OWID_ code: OWID group or former country (World, USSR ...)"
+health_spend_per_capita_ppp,OWID_UMC,Upper-middle-income countries,24,"OWID_ code: OWID group or former country (World, USSR ...)"
+health_spend_per_capita_ppp,OWID_WRL,World,24,"OWID_ code: OWID group or former country (World, USSR ...)"
+health_spend_per_capita_ppp,WB_EAP,East Asia and Pacific (WB),24,code is not 3 capital letters
+health_spend_per_capita_ppp,WB_ECA,Europe and Central Asia (WB),24,code is not 3 capital letters
+health_spend_per_capita_ppp,WB_LAC,Latin America and Caribbean (WB),24,code is not 3 capital letters
+health_spend_per_capita_ppp,WB_MENAP,"Middle East, North Africa, Afghanistan and Pakistan (WB)",24,code is not 3 capital letters
+health_spend_per_capita_ppp,WB_NA,North America (WB),24,code is not 3 capital letters
+health_spend_per_capita_ppp,WB_SA,South Asia (WB),24,code is not 3 capital letters
+health_spend_per_capita_ppp,WB_SSA,Sub-Saharan Africa (WB),24,code is not 3 capital letters
+inflation_cpi_pct,OWID_EU27,European Union (27),66,"OWID_ code: OWID group or former country (World, USSR ...)"
+inflation_cpi_pct,OWID_HIC,High-income countries,45,"OWID_ code: OWID group or former country (World, USSR ...)"
+inflation_cpi_pct,OWID_LIC,Low-income countries,42,"OWID_ code: OWID group or former country (World, USSR ...)"
+inflation_cpi_pct,OWID_LMC,Lower-middle-income countries,45,"OWID_ code: OWID group or former country (World, USSR ...)"
+inflation_cpi_pct,OWID_UMC,Upper-middle-income countries,51,"OWID_ code: OWID group or former country (World, USSR ...)"
+inflation_cpi_pct,OWID_WRL,World,45,"OWID_ code: OWID group or former country (World, USSR ...)"
+inflation_cpi_pct,WB_EAP,East Asia and Pacific (WB),39,code is not 3 capital letters
+inflation_cpi_pct,WB_ECA,Europe and Central Asia (WB),34,code is not 3 capital letters
+inflation_cpi_pct,WB_LAC,Latin America and Caribbean (WB),59,code is not 3 capital letters
+inflation_cpi_pct,WB_MENAP,"Middle East, North Africa, Afghanistan and Pakistan (WB)",56,code is not 3 capital letters
+inflation_cpi_pct,WB_NA,North America (WB),65,code is not 3 capital letters
+inflation_cpi_pct,WB_SA,South Asia (WB),61,code is not 3 capital letters
+inflation_cpi_pct,WB_SSA,Sub-Saharan Africa (WB),51,code is not 3 capital letters
+internet_users_pct,OWID_AFR,Africa,30,"OWID_ code: OWID group or former country (World, USSR ...)"
+internet_users_pct,OWID_ASI,Asia,30,"OWID_ code: OWID group or former country (World, USSR ...)"
+internet_users_pct,OWID_EUR,Europe,33,"OWID_ code: OWID group or former country (World, USSR ...)"
+internet_users_pct,OWID_HIC,High-income countries,21,"OWID_ code: OWID group or former country (World, USSR ...)"
+internet_users_pct,OWID_LIC,Low-income countries,21,"OWID_ code: OWID group or former country (World, USSR ...)"
+internet_users_pct,OWID_LMC,Lower-middle-income countries,21,"OWID_ code: OWID group or former country (World, USSR ...)"
+internet_users_pct,OWID_NAM,North America,31,"OWID_ code: OWID group or former country (World, USSR ...)"
+internet_users_pct,OWID_OCE,Oceania,27,"OWID_ code: OWID group or former country (World, USSR ...)"
+internet_users_pct,OWID_SAM,South America,32,"OWID_ code: OWID group or former country (World, USSR ...)"
+internet_users_pct,OWID_UMC,Upper-middle-income countries,21,"OWID_ code: OWID group or former country (World, USSR ...)"
+internet_users_pct,OWID_WRL,World,21,"OWID_ code: OWID group or former country (World, USSR ...)"
+internet_users_pct,WB_EAP,East Asia and Pacific (WB),21,code is not 3 capital letters
+internet_users_pct,WB_ECA,Europe and Central Asia (WB),21,code is not 3 capital letters
+internet_users_pct,WB_LAC,Latin America and Caribbean (WB),21,code is not 3 capital letters
+internet_users_pct,WB_MENAP,"Middle East, North Africa, Afghanistan and Pakistan (WB)",21,code is not 3 capital letters
+internet_users_pct,WB_NA,North America (WB),21,code is not 3 capital letters
+internet_users_pct,WB_SA,South Asia (WB),21,code is not 3 capital letters
+internet_users_pct,WB_SSA,Sub-Saharan Africa (WB),21,code is not 3 capital letters
+life_expectancy_years,OWID_AFR,Africa,76,"OWID_ code: OWID group or former country (World, USSR ...)"
+life_expectancy_years,OWID_ASI,Asia,78,"OWID_ code: OWID group or former country (World, USSR ...)"
+life_expectancy_years,OWID_EUR,Europe,81,"OWID_ code: OWID group or former country (World, USSR ...)"
+life_expectancy_years,OWID_HIC,High-income countries,74,"OWID_ code: OWID group or former country (World, USSR ...)"
+life_expectancy_years,OWID_LIC,Low-income countries,74,"OWID_ code: OWID group or former country (World, USSR ...)"
+life_expectancy_years,OWID_LMC,Lower-middle-income countries,74,"OWID_ code: OWID group or former country (World, USSR ...)"
+life_expectancy_years,OWID_OCE,Oceania,77,"OWID_ code: OWID group or former country (World, USSR ...)"
+life_expectancy_years,OWID_USS,USSR,2,"OWID_ code: OWID group or former country (World, USSR ...)"
+life_expectancy_years,OWID_UMC,Upper-middle-income countries,74,"OWID_ code: OWID group or former country (World, USSR ...)"
+life_expectancy_years,OWID_WRL,World,81,"OWID_ code: OWID group or former country (World, USSR ...)"
+life_expectancy_years,,Americas,80,"blank code: an OWID group row (region, income group, union)"
+life_expectancy_years,,England and Wales,109,"blank code: an OWID group row (region, income group, union)"
+life_expectancy_years,,High-and-upper-middle-income countries,74,"blank code: an OWID group row (region, income group, union)"
+life_expectancy_years,,Land-locked Developing Countries (LLDC),74,"blank code: an OWID group row (region, income group, union)"
+life_expectancy_years,,Latin America and the Caribbean,74,"blank code: an OWID group row (region, income group, union)"
+life_expectancy_years,,Least developed countries,74,"blank code: an OWID group row (region, income group, union)"
+life_expectancy_years,,Less developed regions,74,"blank code: an OWID group row (region, income group, union)"
+life_expectancy_years,,"Less developed regions, excluding China",74,"blank code: an OWID group row (region, income group, union)"
+life_expectancy_years,,"Less developed regions, excluding least developed countries",74,"blank code: an OWID group row (region, income group, union)"
+life_expectancy_years,,Low-and-Lower-middle-income countries,74,"blank code: an OWID group row (region, income group, union)"
+life_expectancy_years,,Low-and-middle-income countries,74,"blank code: an OWID group row (region, income group, union)"
+life_expectancy_years,,Middle-income countries,74,"blank code: an OWID group row (region, income group, union)"
+life_expectancy_years,,More developed regions,74,"blank code: an OWID group row (region, income group, union)"
+life_expectancy_years,,No income group available,74,"blank code: an OWID group row (region, income group, union)"
+life_expectancy_years,,Northern America,74,"blank code: an OWID group row (region, income group, union)"
+life_expectancy_years,,Northern Ireland,28,"blank code: an OWID group row (region, income group, union)"
+life_expectancy_years,,Scotland,95,"blank code: an OWID group row (region, income group, union)"
+life_expectancy_years,,Small Island Developing States (SIDS),74,"blank code: an OWID group row (region, income group, union)"
+mobile_subs_per_100,OWID_EU27,European Union (27),43,"OWID_ code: OWID group or former country (World, USSR ...)"
+mobile_subs_per_100,OWID_HIC,High-income countries,31,"OWID_ code: OWID group or former country (World, USSR ...)"
+mobile_subs_per_100,OWID_LIC,Low-income countries,31,"OWID_ code: OWID group or former country (World, USSR ...)"
+mobile_subs_per_100,OWID_LMC,Lower-middle-income countries,31,"OWID_ code: OWID group or former country (World, USSR ...)"
+mobile_subs_per_100,OWID_UMC,Upper-middle-income countries,31,"OWID_ code: OWID group or former country (World, USSR ...)"
+mobile_subs_per_100,OWID_WRL,World,41,"OWID_ code: OWID group or former country (World, USSR ...)"
+mobile_subs_per_100,WB_EAP,East Asia and Pacific (WB),46,code is not 3 capital letters
+mobile_subs_per_100,WB_ECA,Europe and Central Asia (WB),46,code is not 3 capital letters
+mobile_subs_per_100,WB_LAC,Latin America and Caribbean (WB),46,code is not 3 capital letters
+mobile_subs_per_100,WB_MENAP,"Middle East, North Africa, Afghanistan and Pakistan (WB)",46,code is not 3 capital letters
+mobile_subs_per_100,WB_NA,North America (WB),43,code is not 3 capital letters
+mobile_subs_per_100,WB_SA,South Asia (WB),46,code is not 3 capital letters
+mobile_subs_per_100,WB_SSA,Sub-Saharan Africa (WB),46,code is not 3 capital letters
+population,AFE,Africa Eastern and Southern,56,World Bank aggregate (a group row with a 3-letter code)
+population,AFW,Africa Western and Central,56,World Bank aggregate (a group row with a 3-letter code)
+population,ARB,Arab World,56,World Bank aggregate (a group row with a 3-letter code)
+population,CSS,Caribbean small states,56,World Bank aggregate (a group row with a 3-letter code)
+population,CEB,Central Europe and the Baltics,56,World Bank aggregate (a group row with a 3-letter code)
+population,EAR,Early-demographic dividend,56,World Bank aggregate (a group row with a 3-letter code)
+population,EAS,East Asia & Pacific,56,World Bank aggregate (a group row with a 3-letter code)
+population,TEA,East Asia & Pacific (IDA & IBRD countries),56,World Bank aggregate (a group row with a 3-letter code)
+population,EAP,East Asia & Pacific (excluding high income),56,World Bank aggregate (a group row with a 3-letter code)
+population,EMU,Euro area,56,World Bank aggregate (a group row with a 3-letter code)
+population,ECS,Europe & Central Asia,56,World Bank aggregate (a group row with a 3-letter code)
+population,TEC,Europe & Central Asia (IDA & IBRD countries),56,World Bank aggregate (a group row with a 3-letter code)
+population,ECA,Europe & Central Asia (excluding high income),56,World Bank aggregate (a group row with a 3-letter code)
+population,EUU,European Union,56,World Bank aggregate (a group row with a 3-letter code)
+population,FCV,"Fragility, Conflict, and Violence (FCV) situations",56,World Bank aggregate (a group row with a 3-letter code)
+population,HPC,Heavily indebted poor countries (HIPC),56,World Bank aggregate (a group row with a 3-letter code)
+population,IBD,IBRD only,56,World Bank aggregate (a group row with a 3-letter code)
+population,IBT,IDA & IBRD total,56,World Bank aggregate (a group row with a 3-letter code)
+population,IDB,IDA blend,56,World Bank aggregate (a group row with a 3-letter code)
+population,IDX,IDA only,56,World Bank aggregate (a group row with a 3-letter code)
+population,IDA,IDA total,56,World Bank aggregate (a group row with a 3-letter code)
+population,LTE,Late-demographic dividend,56,World Bank aggregate (a group row with a 3-letter code)
+population,LCN,Latin America & Caribbean,56,World Bank aggregate (a group row with a 3-letter code)
+population,LAC,Latin America & Caribbean (excluding high income),56,World Bank aggregate (a group row with a 3-letter code)
+population,TLA,Latin America & the Caribbean (IDA & IBRD countries),56,World Bank aggregate (a group row with a 3-letter code)
+population,LDC,Least developed countries: UN classification,56,World Bank aggregate (a group row with a 3-letter code)
+population,LMY,Low & middle income,56,World Bank aggregate (a group row with a 3-letter code)
+population,MEA,"Middle East, North Africa, Afghanistan & Pakistan",56,World Bank aggregate (a group row with a 3-letter code)
+population,TMN,"Middle East, North Africa, Afghanistan & Pakistan (IDA & IBRD)",56,World Bank aggregate (a group row with a 3-letter code)
+population,MNA,"Middle East, North Africa, Afghanistan & Pakistan (excluding high income)",56,World Bank aggregate (a group row with a 3-letter code)
+population,MIC,Middle income,56,World Bank aggregate (a group row with a 3-letter code)
+population,NAC,North America,56,World Bank aggregate (a group row with a 3-letter code)
+population,OED,OECD members,56,World Bank aggregate (a group row with a 3-letter code)
+population,OSS,Other small states,56,World Bank aggregate (a group row with a 3-letter code)
+population,PSS,Pacific island small states,56,World Bank aggregate (a group row with a 3-letter code)
+population,PST,Post-demographic dividend,56,World Bank aggregate (a group row with a 3-letter code)
+population,PRE,Pre-demographic dividend,56,World Bank aggregate (a group row with a 3-letter code)
+population,SST,Small states,56,World Bank aggregate (a group row with a 3-letter code)
+population,SAS,South Asia,56,World Bank aggregate (a group row with a 3-letter code)
+population,TSA,South Asia (IDA & IBRD),56,World Bank aggregate (a group row with a 3-letter code)
+population,SSF,Sub-Saharan Africa,56,World Bank aggregate (a group row with a 3-letter code)
+population,TSS,Sub-Saharan Africa (IDA & IBRD countries),56,World Bank aggregate (a group row with a 3-letter code)
+population,SSA,Sub-Saharan Africa (excluding high income),56,World Bank aggregate (a group row with a 3-letter code)
+population,WLD,World,56,World Bank aggregate (a group row with a 3-letter code)
+population,,High income,56,blank code in World Bank file
+population,,Low income,56,blank code in World Bank file
+population,,Lower middle income,56,blank code in World Bank file
+population,,Not classified,56,blank code in World Bank file
+population,,Upper middle income,56,blank code in World Bank file
+renewables_share_elec_pct,OWID_AFR,Africa,40,"OWID_ code: OWID group or former country (World, USSR ...)"
+renewables_share_elec_pct,OWID_ASI,Asia,40,"OWID_ code: OWID group or former country (World, USSR ...)"
+renewables_share_elec_pct,OWID_EUR,Europe,41,"OWID_ code: OWID group or former country (World, USSR ...)"
+renewables_share_elec_pct,OWID_EU27,European Union (27),41,"OWID_ code: OWID group or former country (World, USSR ...)"
+renewables_share_elec_pct,OWID_HIC,High-income countries,40,"OWID_ code: OWID group or former country (World, USSR ...)"
+renewables_share_elec_pct,OWID_LIC,Low-income countries,25,"OWID_ code: OWID group or former country (World, USSR ...)"
+renewables_share_elec_pct,OWID_LMC,Lower-middle-income countries,25,"OWID_ code: OWID group or former country (World, USSR ...)"
+renewables_share_elec_pct,OWID_NAM,North America,40,"OWID_ code: OWID group or former country (World, USSR ...)"
+renewables_share_elec_pct,OWID_OCE,Oceania,40,"OWID_ code: OWID group or former country (World, USSR ...)"
+renewables_share_elec_pct,OWID_SAM,South America,40,"OWID_ code: OWID group or former country (World, USSR ...)"
+renewables_share_elec_pct,OWID_UMC,Upper-middle-income countries,40,"OWID_ code: OWID group or former country (World, USSR ...)"
+renewables_share_elec_pct,OWID_WRL,World,126,"OWID_ code: OWID group or former country (World, USSR ...)"
+renewables_share_elec_pct,,ASEAN (Ember),26,"blank code: an OWID group row (region, income group, union)"
+renewables_share_elec_pct,,Africa (EI),41,"blank code: an OWID group row (region, income group, union)"
+renewables_share_elec_pct,,Africa (Ember),26,"blank code: an OWID group row (region, income group, union)"
+renewables_share_elec_pct,,Asia (Ember),26,"blank code: an OWID group row (region, income group, union)"
+renewables_share_elec_pct,,Asia Pacific (EI),41,"blank code: an OWID group row (region, income group, union)"
+renewables_share_elec_pct,,CIS (EI),36,"blank code: an OWID group row (region, income group, union)"
+renewables_share_elec_pct,,EU (Ember),36,"blank code: an OWID group row (region, income group, union)"
+renewables_share_elec_pct,,Europe (EI),41,"blank code: an OWID group row (region, income group, union)"
+renewables_share_elec_pct,,Europe (Ember),26,"blank code: an OWID group row (region, income group, union)"
+renewables_share_elec_pct,,G20 (Ember),26,"blank code: an OWID group row (region, income group, union)"
+renewables_share_elec_pct,,G7 (Ember),26,"blank code: an OWID group row (region, income group, union)"
+renewables_share_elec_pct,,Latin America and Caribbean (Ember),26,"blank code: an OWID group row (region, income group, union)"
+renewables_share_elec_pct,,Middle East (EI),41,"blank code: an OWID group row (region, income group, union)"
+renewables_share_elec_pct,,Middle East (Ember),26,"blank code: an OWID group row (region, income group, union)"
+renewables_share_elec_pct,,North America (EI),41,"blank code: an OWID group row (region, income group, union)"
+renewables_share_elec_pct,,North America (Ember),26,"blank code: an OWID group row (region, income group, union)"
+renewables_share_elec_pct,,OECD (EI),41,"blank code: an OWID group row (region, income group, union)"
+renewables_share_elec_pct,,OECD (Ember),26,"blank code: an OWID group row (region, income group, union)"
+renewables_share_elec_pct,,Oceania (Ember),26,"blank code: an OWID group row (region, income group, union)"
+renewables_share_elec_pct,,South and Central America (EI),41,"blank code: an OWID group row (region, income group, union)"
+under5_deaths_per_1000,AFE,Africa Eastern and Southern,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,AFW,Africa Western and Central,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,ARB,Arab World,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,CSS,Caribbean small states,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,CEB,Central Europe and the Baltics,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,EAR,Early-demographic dividend,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,EAS,East Asia & Pacific,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,TEA,East Asia & Pacific (IDA & IBRD countries),56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,EAP,East Asia & Pacific (excluding high income),56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,EMU,Euro area,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,ECS,Europe & Central Asia,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,TEC,Europe & Central Asia (IDA & IBRD countries),56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,ECA,Europe & Central Asia (excluding high income),56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,EUU,European Union,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,FCV,"Fragility, Conflict, and Violence (FCV) situations",56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,HPC,Heavily indebted poor countries (HIPC),56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,IBD,IBRD only,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,IBT,IDA & IBRD total,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,IDB,IDA blend,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,IDX,IDA only,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,IDA,IDA total,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,LTE,Late-demographic dividend,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,LCN,Latin America & Caribbean,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,LAC,Latin America & Caribbean (excluding high income),56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,TLA,Latin America & the Caribbean (IDA & IBRD countries),56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,LDC,Least developed countries: UN classification,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,LMY,Low & middle income,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,MEA,"Middle East, North Africa, Afghanistan & Pakistan",56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,TMN,"Middle East, North Africa, Afghanistan & Pakistan (IDA & IBRD)",56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,MNA,"Middle East, North Africa, Afghanistan & Pakistan (excluding high income)",56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,MIC,Middle income,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,NAC,North America,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,OED,OECD members,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,OSS,Other small states,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,PSS,Pacific island small states,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,PST,Post-demographic dividend,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,PRE,Pre-demographic dividend,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,SST,Small states,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,SAS,South Asia,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,TSA,South Asia (IDA & IBRD),56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,SSF,Sub-Saharan Africa,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,TSS,Sub-Saharan Africa (IDA & IBRD countries),56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,SSA,Sub-Saharan Africa (excluding high income),56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,WLD,World,56,World Bank aggregate (a group row with a 3-letter code)
+under5_deaths_per_1000,,High income,56,blank code in World Bank file
+under5_deaths_per_1000,,Low income,56,blank code in World Bank file
+under5_deaths_per_1000,,Lower middle income,56,blank code in World Bank file
+under5_deaths_per_1000,,Not classified,56,blank code in World Bank file
+under5_deaths_per_1000,,Upper middle income,56,blank code in World Bank file
+unemployment_pct,OWID_CIS,Channel Islands,35,"OWID_ code: OWID group or former country (World, USSR ...)"
+unemployment_pct,OWID_EU27,European Union (27),35,"OWID_ code: OWID group or former country (World, USSR ...)"
+unemployment_pct,OWID_HIC,High-income countries,35,"OWID_ code: OWID group or former country (World, USSR ...)"
+unemployment_pct,OWID_LIC,Low-income countries,35,"OWID_ code: OWID group or former country (World, USSR ...)"
+unemployment_pct,OWID_LMC,Lower-middle-income countries,35,"OWID_ code: OWID group or former country (World, USSR ...)"
+unemployment_pct,OWID_UMC,Upper-middle-income countries,35,"OWID_ code: OWID group or former country (World, USSR ...)"
+unemployment_pct,OWID_WRL,World,35,"OWID_ code: OWID group or former country (World, USSR ...)"
+unemployment_pct,WB_EAP,East Asia and Pacific (WB),35,code is not 3 capital letters
+unemployment_pct,WB_ECA,Europe and Central Asia (WB),35,code is not 3 capital letters
+unemployment_pct,WB_LAC,Latin America and Caribbean (WB),35,code is not 3 capital letters
+unemployment_pct,WB_MENAP,"Middle East, North Africa, Afghanistan and Pakistan (WB)",35,code is not 3 capital letters
+unemployment_pct,WB_NA,North America (WB),35,code is not 3 capital letters
+unemployment_pct,WB_SA,South Asia (WB),35,code is not 3 capital letters
+unemployment_pct,WB_SSA,Sub-Saharan Africa (WB),35,code is not 3 capital letters
+urban_pop_pct,OWID_AFR,Africa,76,"OWID_ code: OWID group or former country (World, USSR ...)"
+urban_pop_pct,OWID_ASI,Asia,76,"OWID_ code: OWID group or former country (World, USSR ...)"
+urban_pop_pct,OWID_EUR,Europe,76,"OWID_ code: OWID group or former country (World, USSR ...)"
+urban_pop_pct,OWID_EU27,European Union (27),76,"OWID_ code: OWID group or former country (World, USSR ...)"
+urban_pop_pct,OWID_HIC,High-income countries,76,"OWID_ code: OWID group or former country (World, USSR ...)"
+urban_pop_pct,OWID_LIC,Low-income countries,76,"OWID_ code: OWID group or former country (World, USSR ...)"
+urban_pop_pct,OWID_LMC,Lower-middle-income countries,76,"OWID_ code: OWID group or former country (World, USSR ...)"
+urban_pop_pct,OWID_MNS,Melanesia,76,"OWID_ code: OWID group or former country (World, USSR ...)"
+urban_pop_pct,OWID_OCE,Oceania,76,"OWID_ code: OWID group or former country (World, USSR ...)"
+urban_pop_pct,OWID_PYA,Polynesia,76,"OWID_ code: OWID group or former country (World, USSR ...)"
+urban_pop_pct,OWID_UMC,Upper-middle-income countries,76,"OWID_ code: OWID group or former country (World, USSR ...)"
+urban_pop_pct,OWID_WRL,World,76,"OWID_ code: OWID group or former country (World, USSR ...)"
+urban_pop_pct,,(UN M49),76,"blank code: an OWID group row (region, income group, union)"
+urban_pop_pct,,Americas (UN M49),76,"blank code: an OWID group row (region, income group, union)"
+urban_pop_pct,,Australia and New Zealand (UN M49),76,"blank code: an OWID group row (region, income group, union)"
+urban_pop_pct,,Caribbean (UN M49),76,"blank code: an OWID group row (region, income group, union)"
+urban_pop_pct,,Central America (UN M49),76,"blank code: an OWID group row (region, income group, union)"
+urban_pop_pct,,Central Asia (UN M49),76,"blank code: an OWID group row (region, income group, union)"
+urban_pop_pct,,Eastern Africa (UN M49),76,"blank code: an OWID group row (region, income group, union)"
+urban_pop_pct,,Eastern Asia (UN M49),76,"blank code: an OWID group row (region, income group, union)"
+urban_pop_pct,,"Europe, Northern America, Australia and New Zealand  (UN SDG)",76,"blank code: an OWID group row (region, income group, union)"
+urban_pop_pct,,Middle Africa (UN M49),76,"blank code: an OWID group row (region, income group, union)"
+urban_pop_pct,,Northern Africa (UN M49),76,"blank code: an OWID group row (region, income group, union)"
+urban_pop_pct,,Northern America (UN M49),76,"blank code: an OWID group row (region, income group, union)"
+urban_pop_pct,,Northern Europe (UN M49),76,"blank code: an OWID group row (region, income group, union)"
+urban_pop_pct,,Oceania (UN M49),76,"blank code: an OWID group row (region, income group, union)"
+urban_pop_pct,,South America (UN M49),76,"blank code: an OWID group row (region, income group, union)"
+urban_pop_pct,,South-eastern Asia (UN M49),76,"blank code: an OWID group row (region, income group, union)"
+urban_pop_pct,,Southern Africa (UN M49),76,"blank code: an OWID group row (region, income group, union)"
+urban_pop_pct,,Southern Asia (UN M49),76,"blank code: an OWID group row (region, income group, union)"
+urban_pop_pct,,Southern Europe (UN M49),76,"blank code: an OWID group row (region, income group, union)"
+urban_pop_pct,,Sub-Saharan Africa (UN M49),76,"blank code: an OWID group row (region, income group, union)"
+urban_pop_pct,,Western Africa (UN M49),76,"blank code: an OWID group row (region, income group, union)"
+urban_pop_pct,,Western Asia (UN M49),76,"blank code: an OWID group row (region, income group, union)"
+urban_pop_pct,,Western Europe (UN M49),76,"blank code: an OWID group row (region, income group, union)"
+urban_pop_pct,UNSDG_CSA,Central and Southern Asia (UN SDG),76,code is not 3 capital letters
+urban_pop_pct,UNSDG_ESEA,Eastern and South-Eastern Asia (UN SDG),76,code is not 3 capital letters
+urban_pop_pct,UNSDG_ENA,Europe and Northern America (UN SDG),76,code is not 3 capital letters
+urban_pop_pct,UN_LAC,Latin America and the Caribbean (UN),76,code is not 3 capital letters
+urban_pop_pct,UNSDG_NAWA,Northern Africa and Western Asia (UN SDG),76,code is not 3 capital letters

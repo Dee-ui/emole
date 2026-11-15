@@ -1,0 +1,20 @@
+# Emolé requirements for Step 1: the data pipeline, tests and code checks.
+# Exact versions, so every machine (your laptop, CI, Docker later) builds the same thing.
+# Heavier libraries (model clients, Whisper, Kokoro, MLflow, FastAPI) are added in the
+# steps that need them, never before.
+
+# --- Data pipeline ---
+duckdb==1.4.5          # version already proven with the planned read-only settings; 2.0 is a new major release (revisit later)
+pandas==2.3.3
+numpy==2.4.6
+pyarrow==26.0.1        # Parquet files (the committed snapshot)
+requests==2.34.2
+PyYAML==6.0.3          # reads data/sources.yaml and data/reference/blocs.yaml
+
+# --- Tests and code checks ---
+pytest==9.2.0
+ruff==0.17.4
+pre-commit==4.7.0
+
+# --- This project, installed so "import emole" works everywhere ---
+-e .
