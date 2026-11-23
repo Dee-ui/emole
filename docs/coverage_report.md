@@ -1,6 +1,6 @@
 # Emolé coverage report
 
-Generated 2026-11-15 by `python scripts/coverage_report.py` from `data/emole.duckdb` (13,328 rows, 238 countries and territories, years 1970-2025).
+Generated 2026-11-23 by `python scripts/coverage_report.py` from `data/emole.duckdb` (13,328 rows, 238 countries and territories, years 1970-2025).
 
 **How to read it.** `latest` is the newest year with any data. `broad` is the newest year in which at least 80% of the column's usual countries report: use it for rankings and group answers. A country's own latest year can be newer.
 
@@ -65,7 +65,7 @@ Membership and income groups are the CURRENT ones, applied to every year.
 | continent = Africa | 58 | 37/58 | 37/58 | 29/58 | 51/58 | 46/58 | 52/58 | 52/58 | 45/58 | 51/58 | 58/58 | 54/58 | 54/58 | 54/58 | 58/58 | 54/58 | 50/58 | 57/58 |
 | continent = Americas | 55 | 24/55 | 24/55 | 23/55 | 34/55 | 29/55 | 34/55 | 35/55 | 29/55 | 33/55 | 55/55 | 37/55 | 35/55 | 46/55 | 55/55 | 46/55 | 41/55 | 49/55 |
 | continent = Asia | 51 | 48/51 | 48/51 | 46/51 | 43/51 | 47/51 | 44/51 | 44/51 | 42/51 | 48/51 | 51/51 | 48/51 | 47/51 | 50/51 | 51/51 | 50/51 | 51/51 | 51/51 |
-| continent = Europe | 50 | 30/50 | 31/50 | 29/50 | 43/50 | 42/50 | 41/50 | 41/50 | 40/50 | 38/50 | 50/50 | 43/50 | 42/50 | 47/50 | 50/50 | 46/50 | 40/50 | 43/50 |
+| continent = Europe | 51 | 30/51 | 31/51 | 29/51 | 43/51 | 42/51 | 41/51 | 41/51 | 40/51 | 38/51 | 50/51 | 43/51 | 42/51 | 48/51 | 50/51 | 46/51 | 40/51 | 43/51 |
 | continent = Oceania | 23 | 10/23 | 10/23 | 10/23 | 11/23 | 8/23 | 14/23 | 14/23 | 9/23 | 11/23 | 23/23 | 14/23 | 14/23 | 19/23 | 23/23 | 18/23 | 14/23 | 19/23 |
 | subregion = Australia and New Zealand | 2 | 2/2 | 2/2 | 2/2 | 2/2 | 2/2 | 2/2 | 2/2 | 2/2 | 2/2 | 2/2 | 2/2 | 2/2 | 2/2 | 2/2 | 2/2 | 2/2 | 2/2 |
 | subregion = Caribbean | 28 | 5/28 | 5/28 | 4/28 | 13/28 | 10/28 | 13/28 | 13/28 | 10/28 | 11/28 | 28/28 | 15/28 | 13/28 | 22/28 | 28/28 | 22/28 | 17/28 | 23/28 |
@@ -79,7 +79,7 @@ Membership and income groups are the CURRENT ones, applied to every year.
 | subregion = Middle Africa | 9 | 6/9 | 6/9 | 5/9 | 9/9 | 7/9 | 9/9 | 9/9 | 7/9 | 9/9 | 9/9 | 9/9 | 9/9 | 9/9 | 9/9 | 9/9 | 7/9 | 9/9 |
 | subregion = Northern Africa | 7 | 6/7 | 6/7 | 6/7 | 5/7 | 4/7 | 6/7 | 6/7 | 5/7 | 5/7 | 7/7 | 6/7 | 6/7 | 6/7 | 7/7 | 6/7 | 6/7 | 6/7 |
 | subregion = Northern America | 5 | 2/5 | 2/5 | 2/5 | 2/5 | 2/5 | 2/5 | 2/5 | 1/5 | 2/5 | 5/5 | 2/5 | 2/5 | 4/5 | 5/5 | 4/5 | 4/5 | 5/5 |
-| subregion = Northern Europe | 14 | 6/14 | 7/14 | 7/14 | 10/14 | 10/14 | 10/14 | 10/14 | 10/14 | 10/14 | 14/14 | 10/14 | 10/14 | 12/14 | 14/14 | 12/14 | 10/14 | 11/14 |
+| subregion = Northern Europe | 15 | 6/15 | 7/15 | 7/15 | 10/15 | 10/15 | 10/15 | 10/15 | 10/15 | 10/15 | 14/15 | 10/15 | 10/15 | 13/15 | 14/15 | 12/15 | 10/15 | 11/15 |
 | subregion = Polynesia | 9 | 1/9 | 1/9 | 1/9 | 1/9 | 1/9 | 3/9 | 3/9 | 2/9 | 3/9 | 9/9 | 3/9 | 3/9 | 5/9 | 9/9 | 4/9 | 5/9 | 7/9 |
 | subregion = South America | 14 | 10/14 | 10/14 | 10/14 | 11/14 | 10/14 | 11/14 | 12/14 | 10/14 | 12/14 | 14/14 | 12/14 | 12/14 | 12/14 | 14/14 | 12/14 | 12/14 | 13/14 |
 | subregion = South-eastern Asia | 11 | 10/11 | 10/11 | 9/11 | 9/11 | 11/11 | 11/11 | 11/11 | 10/11 | 11/11 | 11/11 | 11/11 | 11/11 | 11/11 | 11/11 | 11/11 | 11/11 | 11/11 |

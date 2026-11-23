@@ -1,6 +1,6 @@
 {
   "build_version": 1,
-  "built_at_utc": "2026-11-15T03:31:26+00:00",
+  "built_at_utc": "2026-11-23T10:08:17+00:00",
   "year_min": 1970,
   "year_max": 2026,
   "rows": 13328,
@@ -28,6 +28,7 @@
     "air_freight_mtkm": {
       "value_column": "is_air_good_mt_k1",
       "file": "owid_air-transport-freight-ton-km__2026-11-15.csv",
+      "scale": 1e-06,
       "rows_kept": 7513,
       "rows_outside_years": 0,
       "download_date": "2026-11-15"
