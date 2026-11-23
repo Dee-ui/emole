@@ -51,6 +51,9 @@ def load_sources(path: Path = None) -> list:
             raise SourceListError(f"{name}: a World Bank column needs a code")
         if c["source"] not in ("owid", "worldbank"):
             raise SourceListError(f"{name}: source must be owid or worldbank")
+        scale = c.get("scale", 1)
+        if isinstance(scale, bool) or not isinstance(scale, (int, float)) or scale <= 0:
+            raise SourceListError(f"{name}: scale must be a positive number (it multiplies every value)")
     names = {c["column"] for c in cols}
     if "population" not in names:
         raise SourceListError("population is required: it is the weight for group averages")

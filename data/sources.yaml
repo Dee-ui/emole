@@ -24,6 +24,8 @@
 #   checked       what the source page showed when checked by hand on 8 November 2026
 #                 (the build measures the real years from the data every time)
 #   value_column  optional: the CSV column to use if a file holds more than one value column
+#   scale         optional: multiply every value by this to turn the source's unit into ours
+#                 (default 1). Used when a source changes the unit, never to round or adjust.
 
 version: 1
 checked_on: 2026-11-08
@@ -71,6 +73,9 @@ columns:
     producer: International Civil Aviation Organization (ICAO), via World Bank
     licence: CC BY 4.0
     caveat: aviation
+    # OWID republishes this series in plain tonne-km (USA 2019: 42,498,260,000), a million
+    # times the World Bank's own unit (USA 2019: 42,498). Found on the first real build.
+    scale: 0.000001
     checked: {range: "1970-2023"}
 
   - column: internet_users_pct
