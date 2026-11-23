@@ -67,6 +67,10 @@ def build_table(sources: list, files: dict, ref_dir: Path = None,
         else:
             rows, rem, info = parse_wb_indicator(files[col], col, aggregates)
             names.append(rows[["iso3", "entity"]].assign(src="wb"))
+        scale = c.get("scale", 1)
+        if scale != 1:                              # change the source's unit to ours (see sources.yaml)
+            rows = rows.assign(value=rows["value"] * scale)
+            info["scale"] = scale
         in_range = rows["year"].between(year_min, year_max)
         info.update(rows_kept=int(in_range.sum()), rows_outside_years=int((~in_range).sum()),
                     download_date=fetch.download_date(files[col]))

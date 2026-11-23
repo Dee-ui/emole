@@ -74,3 +74,26 @@ def test_bloc_count_mismatch_is_rejected(tmp_path):
                    encoding="utf-8")
     with pytest.raises(SourceListError, match="says 3 members"):
         load_blocs(bad)
+
+
+def test_freight_is_scaled_to_million_tonne_km():
+    freight = next(c for c in load_sources() if c["column"] == "air_freight_mtkm")
+    assert freight["unit"] == "million tonne-km"
+    assert freight["scale"] == pytest.approx(1e-6)
+
+
+@pytest.mark.parametrize("bad", [0, -1, "1e-6", True])
+def test_scale_must_be_a_positive_number(tmp_path, bad):
+    text = (config.SOURCES_FILE.read_text(encoding="utf-8")
+            .replace("scale: 0.000001", f"scale: {bad!r}" if isinstance(bad, str) else f"scale: {bad}"))
+    path = tmp_path / "sources.yaml"
+    path.write_text(text, encoding="utf-8")
+    with pytest.raises(SourceListError, match="scale"):
+        load_sources(path)
+
+
+def test_channel_islands_has_a_continent():
+    from emole.data.groups import load_regions
+    regions = load_regions().set_index("iso3")
+    assert regions.loc["CHI", "continent"] == "Europe"
+    assert regions.loc["CHI", "subregion"] == "Northern Europe"

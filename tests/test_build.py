@@ -1,6 +1,7 @@
 """The whole build on the fixtures: right rows, right values, groups filled, files written."""
 import duckdb
 import pandas as pd
+import pytest
 
 from emole.data.build import read_snapshot, run
 
@@ -110,3 +111,20 @@ def test_build_is_repeatable(built, tmp_path):
     second = run(offline=True, sources_file=SOURCES, raw_dir=RAW, out_dir=tmp_path / "p",
                  db_path=tmp_path / "e.duckdb", year_min=1970, year_max=2026)
     pd.testing.assert_frame_equal(second["wide"], built["wide"])
+
+
+def test_scale_changes_the_unit_and_is_recorded():
+    from emole import config
+    from emole.data.build import build_table, collect_files
+    from emole.data.sources import load_sources
+    sources = load_sources(SOURCES)
+    files = collect_files(sources, RAW, refresh=False, offline=True)
+    plain, _, _, _ = build_table(sources, files, config.REFERENCE_DIR, 1970, 2026)
+    scaled_sources = [dict(c, scale=0.001) if c["column"] == "air_passengers" else c for c in sources]
+    scaled, _, infos, _ = build_table(scaled_sources, files, config.REFERENCE_DIR, 1970, 2026)
+    p = plain.set_index(["iso3", "year"])
+    s = scaled.set_index(["iso3", "year"])
+    before = p.loc[("NGA", 2023), "air_passengers"]
+    assert s.loc[("NGA", 2023), "air_passengers"] == pytest.approx(before * 0.001)
+    assert s.loc[("NGA", 2023), "population"] == p.loc[("NGA", 2023), "population"]   # others untouched
+    assert infos["air_passengers"]["scale"] == 0.001

@@ -10,6 +10,9 @@ blocs, the group maths and what was left out.
 on that date. The build measures the real years every time and stores them in the
 `column_meta` table and in `docs/coverage_report.md`; those measured years win.
 
+**First real build:** 15 November 2026, on the owner's laptop: 13,328 rows, 238
+countries and territories, years 1970 to 2025 (`data/processed/build_info.json`).
+
 ---
 
 ## 1. The table at a glance
@@ -90,10 +93,11 @@ data in one clean file shape.
 
 #### `air_freight_mtkm`
 - **Meaning:** freight (including express and diplomatic bags, not passenger baggage) carried by airlines registered in the country, in million tonne-kilometres. One tonne flown one kilometre is one tonne-kilometre.
-- **Unit:** million tonne-km. **Group rule:** sum.
+- **Unit:** million tonne-km, the World Bank's own unit for this code. **Group rule:** sum.
+- **Scaled at build time:** OWID publishes this series in plain tonne-km (the United States in 2019: 42,498,260,000), a million times the World Bank's figure for the same code (42,498). `sources.yaml` sets `scale: 0.000001`, so the stored numbers match the World Bank site that anyone can check against. The first real build showed the mismatch; see PL-016.
 - **Source:** OWID chart [`air-transport-freight-ton-km`](https://ourworldindata.org/grapher/air-transport-freight-ton-km) (IS.AIR.GOOD.MT.K1). **Producer:** ICAO, via World Bank. **Licence:** CC BY 4.0.
 - **Years (as checked):** 1970 to 2023.
-- **Quirks:** registered-airlines caveat. The figure grows with distance, so a country whose airlines fly long routes shows more tonne-km for the same cargo weight.
+- **Quirks:** registered-airlines caveat. The figure grows with distance, so a country whose airlines fly long routes shows more tonne-km for the same cargo weight. Some countries report exactly 0 in some years (25 countries in 2019, Ghana in 2018 and 2019); a 0 is the source's own value, not a gap. Coverage is the thinnest of the three aviation columns (137 countries in 2023; 4 of 12 ECOWAS members).
 
 #### `internet_users_pct`
 - **Meaning:** share of the population who used the internet (from any device or place) in the last three months.
@@ -201,6 +205,18 @@ data in one clean file shape.
 - **Years (as checked):** 1750 to 2024 (kept from 1970); next update expected November 2026.
 - **Quirks:** production-based (emissions inside the country), not consumption-based. Small oil and gas producers show very high values.
 
+### 3.1 Coverage review of the first real build (15 November 2026)
+
+The pre-registered flag rule (decision E-48) flagged one column. Nothing was dropped.
+
+| Column | Flag | Decision |
+|---|---|---|
+| `air_freight_mtkm` | A peer misses more than 3 of the latest 5 years: Ghana has no value for 2020 to 2023 (and reported 0 in 2018 and 2019) | **Kept** (E-57). Nigeria and the other 15 peers have values; 137 countries report in 2023, its broad-coverage year. The flag is about one peer, not the column. Answers that compare Ghana's air freight say there is no recent value, and group answers carry the usual coverage note ("based on 4 of 12 ECOWAS countries"). |
+
+Other things the review showed (no flag, but Emolé must handle them):
+- **A newest year can be thin.** `internet_users_pct` has 2025 values for only 10 countries (its broad year is 2024, with 182); `health_spend_per_capita_ppp` has 2024 for 22 (broad 2023, 192); `renewables_share_elec_pct` has 2025 for 91 (broad 2024, 196). Rankings and group answers use the broad year (E-47).
+- **Every peer misses 2025 internet use** except India and China, and every peer except the UK and Germany misses 2024 health spending: this is publication timing, not a data problem.
+
 ---
 
 ## 4. Groupings
@@ -209,7 +225,7 @@ data in one clean file shape.
 - **Source:** the UN Statistics Division's M49 standard, [unstats.un.org/unsd/methodology/m49](https://unstats.un.org/unsd/methodology/m49/). UNSD offers no stable download link (its buttons are made by JavaScript), so the list was taken from the open-source package [`un-m49`](https://github.com/wooorm/un-m49) version 2.2.0 (MIT licence), which holds the same standard. File fingerprint (sha256, first 16 characters): `14faf74380d185db`. Converted by `scripts/make_m49_reference.py` into the committed file `data/reference/un_m49.csv` (248 countries and areas).
 - `continent` = the M49 region: Africa, Americas, Asia, Europe, Oceania.
 - `subregion` = the most specific M49 level: the intermediate region where M49 has one (Nigeria: Western Africa; Brazil: South America), otherwise the M49 subregion (Egypt: Northern Africa; Saudi Arabia: Western Asia).
-- **Added by hand** (`data/reference/manual_regions.csv`), because M49 does not list them: Taiwan (Asia, Eastern Asia) and Kosovo (Europe, Southern Europe).
+- **Added by hand** (`data/reference/manual_regions.csv`), because the M49 file has no row for them: Taiwan (Asia, Eastern Asia), Kosovo (Europe, Southern Europe) and, since the first real build, the Channel Islands (`CHI`, Europe, Northern Europe). `CHI` is the World Bank's single code for Jersey and Guernsey together; M49 lists the Channel Islands (code 830) in Northern Europe but they have no ISO 3-letter code, so the M49 file could not match them.
 - Note: in M49, Sudan sits in Northern Africa, and Cyprus and Turkiye in Western Asia (Asia).
 
 ### 4.2 `wb_region` and `income_group`: World Bank
@@ -217,6 +233,7 @@ data in one clean file shape.
 - `income_group` values: `low`, `lower-middle`, `upper-middle`, `high`. Empty where the World Bank does not classify a country.
 - **Which classification:** the CURRENT one, **FY2027, effective 1 July 2026**, based on 2025 income (Atlas method). Thresholds: low income up to $1,175; lower-middle $1,176 to $4,635; upper-middle $4,636 to $14,375; high above $14,375. In this update Jordan, Micronesia, the Philippines, Sri Lanka and Viet Nam moved up to upper-middle income and Togo moved up to lower-middle; no country moved down. Ethiopia (unclassified the year before) was classified low income and Venezuela lower-middle income.
 - **Applied to every year** (rule 2 above). Income groups change over time, so Emolé says "current income group".
+- **No World Bank region or income group** (first real build): 21 territories that the World Bank does not list as economies, for example Anguilla (AIA), Bonaire (BES), the Cook Islands (COK), Western Sahara (ESH), Guernsey (GGY), Jersey (JEY), Martinique (MTQ), Reunion (REU). They keep their UN continent and subregion. The full list is printed by the build ("Grouping gaps").
 
 ### 4.3 Bloc columns (true/false)
 All lists live in `data/reference/blocs.yaml`, with their "as of" date (8 November 2026) and sources. The build stops if a list's member count does not match.
@@ -268,7 +285,34 @@ Every removed row is listed in `data/processed/removed_rows.csv` (column, code, 
 - **OWID former countries.** USSR, Yugoslavia, Czechoslovakia and similar carry `OWID_` codes and are removed.
 - **Kosovo** is the one `OWID_` code that is a real country today: it is kept, renamed from `OWID_KOS` to the World Bank's `XKX` so both sources land on the same row.
 - **World Bank group rows.** The World Bank's groups use 3-letter codes too (WLD = World, SSF = Sub-Saharan Africa, EUU = European Union, HIC = High income, and so on), so the 3-letter rule alone would let them in. They are removed by checking each code against the World Bank's own country list, which marks groups as "Aggregates".
+- **Codes that are not 3 capital letters.** OWID now also publishes World Bank regions (`WB_SSA`, `WB_EAP` ...) and UN SDG regions (`UNSDG_ENA` ...) as rows. They are not countries and are removed by the same 3-letter rule.
+- **England and Wales, Scotland, Northern Ireland** appear in OWID's life expectancy file with a blank code; they are removed (the United Kingdom row stays).
 - **Empty values** and **years outside 1970 to the current year** are dropped (counted in `build_info`).
+
+**Measured on the first real build (15 November 2026):**
+
+| Reason | Names | Rows |
+|---|---|---|
+| OWID `OWID_` code (World, continents, income groups, USSR ...) | 16 | 6,826 |
+| World Bank aggregate with a 3-letter code (WLD, SSF, EUU ...) | 44 | 9,856 |
+| Blank code in a World Bank file (income-group rows) | 5 | 1,120 |
+| Blank code in an OWID file (regions, unions, UK nations) | 66 | 4,892 |
+| Code not 3 capital letters (`WB_` and `UNSDG_` regions) | 12 | 2,795 |
+| **Total** | **143** | **25,489** |
+
+### 6.1 Source file formats are not fixed (decision E-56)
+
+OWID changed its CSV download between the source check (8 November 2026) and the first
+real build (15 November 2026): the header came back in lowercase (`entity,code,year`
+instead of `Entity,Code,Year`) and every file gained an extra metadata column,
+`owid_region`. The build stopped at once with one clear message instead of importing a
+broken column (PL-014).
+
+The long-term pattern, not a one-off patch:
+- The three key columns are matched **by name, ignoring upper and lower case**, then renamed to fixed names (`parse.py`, `parse_owid`; the download check in `fetch.py`, `fetch_owid`, ignores case too).
+- **Any column whose name starts with `owid_` is OWID's own metadata** and is dropped before the value column is picked, so exactly one value column remains.
+- Anything else unexpected (a second value column, a missing key column, a web page instead of a CSV) still **stops the build** with a plain message. Being tolerant of casing and metadata never means guessing which number is the value.
+- Tests cover the old format, the new format and a web page returned by mistake (`tests/test_parse.py`).
 
 ---
 
@@ -302,3 +346,4 @@ For example: `International Civil Aviation Organization (ICAO), via Our World in
 | Date | Step | Change |
 |---|---|---|
 | 8 Nov 2026 | 1 | First version: 17 columns checked, groupings, blocs, Middle East list, group maths, snapshot, credits. Measured years to be confirmed from the first real build. |
+| 18 Nov 2026 | 1 (close-out) | First real build recorded; coverage review (3.1, nothing dropped); air freight scaled from tonne-km to million tonne-km; Channel Islands given a region; 21 territories without a World Bank group listed; new removal reason and real removal counts (6); OWID format note (6.1). |
