@@ -34,7 +34,7 @@ writes every LinkedIn and X post from this file, so the content comes from real 
 ### PL-002: The World Bank's "World" row wears a country-style code
 - **Step:** 1
 - **What happened:** OWID marks its group rows with a blank code or an `OWID_` code, so "keep 3-letter codes only" removes them. But the World Bank's group rows use 3-letter codes too (WLD for World, SSF for Sub-Saharan Africa, EUU for the European Union, HIC for High income). The same rule would have let every World Bank group into the country table, and "World" would have topped every country ranking. A second filter now checks each World Bank code against the World Bank's own country list, which marks groups as "Aggregates".
-- **Real numbers:** in the test files, 2 of 2 World Bank aggregates were removed (WLD, SSF) along with 5 OWID group names. The count in the real data is measured by the first full build (to be filled from `data/processed/removed_rows.csv`).
+- **Real numbers:** in the test files, 2 of 2 World Bank aggregates were removed (WLD, SSF) along with 5 OWID group names. On the first real build (15 November 2026), 44 World Bank aggregates were removed (9,856 rows), plus 5 blank-coded World Bank income-group rows (1,120 rows). Across both sources, 143 group names and 25,489 rows were removed in total, and no group row reached `country_year`.
 - **Why it matters:** a cleaning rule that works for one source can silently fail for another. Check every source's group rows separately.
 - **Evidence:** `src/emole/data/parse.py` (two rules); `tests/test_parse.py::test_world_bank_aggregates_are_removed_even_with_3_letter_codes`; after the real build, `data/processed/removed_rows.csv`.
 - **Angles:** LinkedIn: a data-quality lesson in one sentence, "the World would have been the biggest country". X: before/after of a ranking with WLD at number 1.
@@ -98,7 +98,7 @@ writes every LinkedIn and X post from this file, so the content comes from real 
 ### PL-010: "Latest year" turned out not to be one number
 - **Step:** 1
 - **What happened:** Ember's electricity data has 2025 figures for 91 countries, far fewer than its usual coverage, so "the latest year" for renewables is either 2025 (any data) or 2024 (broad coverage). The build now stores both for every column: `latest_year` and `latest_broad_year` (the newest year where at least 80% of the column's usual countries report). Rankings and group answers will use the broad year.
-- **Real numbers:** in the test files, one column's newest year had 2 of its usual 3 countries, so its broad year moved back one year. The real values for all 17 columns come from the first full build.
+- **Real numbers:** in the test files, one column's newest year had 2 of its usual 3 countries, so its broad year moved back one year. On the first real build, 3 of 17 columns had a newest year far thinner than the one before it: internet use had 2025 values for 10 countries against 182 in 2024; health spending had 2024 values for 22 countries against 192 in 2023; renewables had 2025 values for 91 countries against 196 in 2024.
 - **Why it matters:** a ranking built on a thin year silently compares the 91 countries that reported, not the world.
 - **Evidence:** `src/emole/data/build.py::broad_year`; `tests/test_build.py::test_column_meta_measures_years`; after the real build, section 1 of `docs/coverage_report.md`.
 - **Angles:** LinkedIn: "latest" is a definition, not a fact. X: the 91-countries example.
@@ -106,15 +106,15 @@ writes every LinkedIn and X post from this file, so the content comes from real 
 ### PL-011: The secrets check caught fake keys hiding in the test cache
 - **Step:** 1
 - **What happened:** A pre-commit hook now blocks token-shaped strings (Groq, Google, Hugging Face, GitHub and AWS key shapes, private keys, and long secret assignments) before any commit. Its tests build fake keys at run time so the test file itself is clean. A repo-wide test then found the fake keys inside pytest's own cache, because parametrised test names included them. The cache is never committed, but the test names were changed so no fake key is ever written anywhere. In a real Git test, a clean commit passed and a commit holding a fake Groq-shaped key was blocked.
-- **Real numbers:** 5 key shapes tested; 1 fake-key commit blocked out of 1 tried; 0 hits in a scan of the whole repository.
+- **Real numbers:** 5 key shapes tested; 1 fake-key commit blocked out of 1 tried in the build workspace, and 1 of 1 again on the owner's Windows laptop on 15 November 2026 ("BLOCKED: leak_test.py:1 looks like a Groq API key."); 0 hits in a scan of the whole repository.
 - **Why it matters:** secrets leak through side doors (caches, logs, test names), not just source files. Prevention beats remembering.
-- **Evidence:** `scripts/check_no_secrets.py`; `.pre-commit-config.yaml`; `tests/test_secrets.py`; terminal output of the blocked commit (capture a screenshot when you repeat the test in the guide, Part 3).
+- **Evidence:** `scripts/check_no_secrets.py`; `.pre-commit-config.yaml`; `tests/test_secrets.py`; screenshot `docs/evidence/step1/PL-011_secret-blocked.png` (the blocked commit in PowerShell).
 - **Angles:** LinkedIn: secrets hygiene for AI apps that use API keys. X: "my secrets scanner found secrets in my test cache".
 
 ### PL-012: The data is committed, so the demo never depends on a source being online
 - **Step:** 1
 - **What happened:** After each build, the finished table is saved as a small Parquet snapshot in the repo, with its column metadata, build info and the list of removed rows. The database can be rebuilt from it with no internet. Docker builds and test answers will use the same numbers even if a source changes or goes offline.
-- **Real numbers:** rebuilding from the snapshot was tested (same table, row for row). Snapshot size is measured after the first real build.
+- **Real numbers:** rebuilding from the snapshot was tested (same table, row for row). The first real snapshot holds 13,328 rows for 238 countries and territories (1970 to 2025) in a 1.1 MB Parquet file (1,102,622 bytes).
 - **Why it matters:** reproducibility. A test answer key that changes when a website updates is not an answer key.
 - **Evidence:** `data/processed/`; `tests/test_build.py::test_snapshot_rebuild_gives_the_same_table`.
 - **Angles:** LinkedIn: reproducible data for AI evaluation. X: "my CI never downloads data".
@@ -126,3 +126,43 @@ writes every LinkedIn and X post from this file, so the content comes from real 
 - **Why it matters:** an hour of checking prevents a week of rework.
 - **Evidence:** the `checked` fields in `data/sources.yaml`; `docs/DATA.md` section 3.
 - **Angles:** LinkedIn: "verify before you build" as an engineering habit. X: a checklist screenshot of the 17 sources.
+
+### PL-014: Our World in Data changed its file format, and the build refused to guess
+- **Step:** 1 (first real build, 15 November 2026)
+- **What happened:** The sources were checked on 8 November. When the owner ran the first real build a week later, it stopped on the very first column with one message: `BUILD STOPPED: OWID chart 'air-passengers-carried' did not return the expected CSV (first characters: 'entity,code,year,is_air_psgr,owid_region ...')`. Two things had changed at OWID: the header row now came back in lowercase (`entity,code,year` instead of `Entity,Code,Year`), and every download carried an extra metadata column, `owid_region`, next to the real value. Every OWID column would have failed the same way. The owner fixed two functions: the download check now ignores upper and lower case, and the cleaning step matches the three key columns by name in any case and drops any column starting with `owid_` before picking the value column. The fix became the long-term rule (decision E-56), and four regression tests now cover the old format, the new format and a web page returned by mistake.
+- **Real numbers:** 1 format change, 13 of 17 columns affected (every OWID column), 0 rows imported before the stop, 2 functions changed, 4 tests added. After the fix the build finished: 13,328 rows, 238 countries and territories.
+- **Why it matters:** a source can change between the day you check it and the day you run it. A pipeline that stops loudly is far better than one that "works" and quietly loads the wrong column (here, `owid_region` could have been picked as the value).
+- **Evidence:** the stop message above (owner's terminal, 15 November 2026); the fix in commit `6168394` (`src/emole/data/fetch.py::fetch_owid`, `src/emole/data/parse.py::parse_owid`); `tests/test_parse.py::test_new_owid_format_lowercase_header_and_owid_columns`; `docs/DATA.md` section 6.1.
+- **Angles:** LinkedIn: "fail loudly" as a data engineering habit, with the one-line message as the hero image. X: "A data source changed its header from Entity to entity in one week. My build stopped instead of guessing. Good."
+
+### PL-015: A download timed out halfway, and the rerun picked up where it stopped
+- **Step:** 1 (first real build)
+- **What happened:** On the first full run, the World Bank's server took too long to answer for under-five mortality (`SH.DYN.MORT`), the 11th of 17 columns. After 3 tries the build stopped with `BUILD STOPPED: Could not download ... (ReadTimeout)`. Because every download is saved with its date in the file name, running the same command again reused the 10 files already saved that day and only downloaded the remaining 7, then finished.
+- **Real numbers:** 3 tries with a 60-second limit each before stopping; 10 of 17 files reused on the second run; 0 changes to code or settings needed.
+- **Why it matters:** free public APIs are slow sometimes. Saving each finished download means a failure costs one file, not the whole run.
+- **Evidence:** the two runs in the owner's terminal (15 November 2026); `src/emole/data/fetch.py` (`raw_path`, `latest_raw`).
+- **Angles:** LinkedIn: designing for flaky free APIs. X: "Build died at file 11 of 17. Reran it. It skipped the 10 it already had."
+
+### PL-016: The same indicator code, a million times apart
+- **Step:** 1 (review of the first real build)
+- **What happened:** A sense check of every column after the first build showed that air freight was far too big: the United States carried 42,498,260,000 in 2019, against a world air freight total of about 220 billion tonne-km that year. The World Bank publishes this indicator (`IS.AIR.GOOD.MT.K1`) in million tonne-km, where the United States shows 42,498. Our World in Data republishes the same code converted to plain tonne-km, a million times bigger, while Emolé's column name and unit said "million". No error was raised anywhere, because nothing was broken: only the unit was wrong. A new optional `scale` field in `sources.yaml` now converts the values at build time (`scale: 0.000001`), and tests check it.
+- **Real numbers:** 1 of 17 columns wrong by a factor of 1,000,000. United States 2019: 42,498,260,000 before, 42,498.26 million tonne-km after. Nigeria 2023: 3,141,785 before, 3.14 after. The other 16 columns were checked the same way (smallest, middle and largest value in 2019, plus Nigeria) and looked right.
+- **Why it matters:** the same code from two publishers does not guarantee the same unit. Checking magnitudes against one known value catches what no type check or test can.
+- **Evidence:** the `scale` line and its comment in `data/sources.yaml`; `docs/DATA.md` section 3 (`air_freight_mtkm`); `tests/test_sources.py::test_freight_is_scaled_to_million_tonne_km`; `tests/test_build.py::test_scale_changes_the_unit_and_is_recorded`.
+- **Angles:** LinkedIn: "my data was right in every way except the one that matters", a short lesson on sanity checks. X: "Same indicator code. Two publishers. A factor of one million."
+
+### PL-017: 238 countries in, 143 group names out
+- **Step:** 1 (first real build)
+- **What happened:** The first real build turned 17 downloads into one table of real countries and territories. It removed every row that described a group instead of a country: OWID continents and income groups, World Bank aggregates, and some surprises, such as World Bank and UN regions that OWID now also publishes (`WB_SSA`, `UNSDG_ENA`), the USSR, and "England and Wales" and "Scotland" in the life expectancy file. Each removal is listed with its reason in `removed_rows.csv`.
+- **Real numbers:** 13,328 rows; 238 countries and territories; 1970 to 2025; 25,489 rows removed under 143 group names, in 5 reasons (OWID_ codes 6,826 rows; World Bank aggregates 9,856; blank World Bank codes 1,120; blank OWID codes 4,892; non-standard codes 2,795).
+- **Why it matters:** an assistant that ranks countries must only see countries. "World" or "High income" at the top of a ranking is the most common silent error in public data work.
+- **Evidence:** `data/processed/removed_rows.csv`; the build summary (owner's terminal); `docs/DATA.md` section 6.
+- **Angles:** LinkedIn: a breakdown of what "cleaning" meant in numbers. X: "25,489 rows deleted. Every one of them was a region pretending to be a country."
+
+### PL-018: The pre-registered flag fired once, and the column was kept
+- **Step:** 1 (coverage review)
+- **What happened:** The flag rule was written before the first build (under 60% coverage, Nigeria missing recent years, or a peer missing more than 3 of the last 5 years). It fired for exactly one column: air freight, because Ghana has no value from 2020 to 2023 (and reported 0 in 2018 and 2019). The rule says a flag means review, not drop. On review the column stayed: Nigeria and 15 of 16 peers have values, and 137 countries report in 2023. Emolé will say when a country has no recent value, and group answers show their coverage (4 of 12 ECOWAS countries report air freight).
+- **Real numbers:** 17 columns checked; 1 flagged; 0 dropped. Nigeria had every value in the latest 5 years for 15 of 17 columns (internet use is missing 2025 and health spending 2024, both because those years are not published yet).
+- **Why it matters:** a rule written before the results keeps the review honest, and "flag means review" stops a single gap from deleting a useful column.
+- **Evidence:** `docs/coverage_report.md` sections 2 and 3; `docs/DATA.md` section 3.1.
+- **Angles:** LinkedIn: pre-registration for data decisions. X: "Wrote the rule before seeing the data. It flagged one column. I kept it, and wrote down why."
