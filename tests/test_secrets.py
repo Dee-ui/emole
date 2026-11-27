@@ -50,7 +50,7 @@ def test_allow_marker_skips_a_line(tmp_path):
     assert cns.main([str(f)]) == 0
 
 
-IGNORED = {".git", ".venv", "venv", "__pycache__", ".pytest_cache", ".ruff_cache", "raw"}
+IGNORED = {".git", ".venv", "venv", "__pycache__", ".pytest_cache", ".ruff_cache", "raw", ".env"}
 
 
 def test_the_repository_itself_is_clean():
