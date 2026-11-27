@@ -166,3 +166,59 @@ writes every LinkedIn and X post from this file, so the content comes from real 
 - **Why it matters:** a rule written before the results keeps the review honest, and "flag means review" stops a single gap from deleting a useful column.
 - **Evidence:** `docs/coverage_report.md` sections 2 and 3; `docs/DATA.md` section 3.1.
 - **Angles:** LinkedIn: pre-registration for data decisions. X: "Wrote the rule before seeing the data. It flagged one column. I kept it, and wrote down why."
+
+### PL-019: A plain average moved Oceania's life expectancy by almost six years
+- **Step:** 2
+- **What happened:** Emolé's engine has a check that runs before any query: when one number combines several countries, it must use that measure's group rule, never a plain average. To show why, the same question was answered both ways on the real table. In a test where a stand-in model wrote the common mistake, `AVG(electricity_access_pct)` for West Africa, the check replaced it with the population-weighted `pop_avg(...)` in code, with no second model call, and the answer gained the note "based on 16 of 17 Western Africa countries with data for 2024 (population-weighted average)".
+- **Real numbers:** life expectancy 2023, Oceania: plain average 72.95 years, population-weighted 78.74 (19 of 23 countries). Africa: 66.22 against 64.21 (54 of 58). Western Africa electricity access 2024: 57.89% against 60.33% (16 of 17). How often real models write AVG() is measured in the owner's smoke runs (Step 2 close-out) and Step 3.
+- **Why it matters:** a plain average lets Tonga count as much as Australia. Group maths is a rule for code to enforce, not something to hope a model remembers.
+- **Evidence:** `docs/DATA.md` section 5 (the table); `src/emole/pipeline/checks.py` (`fix_group_maths`); `tests/test_checks.py::test_plain_average_across_countries_is_fixed`; `tests/test_engine.py::test_group_question_is_fixed_and_carries_its_coverage`.
+- **Angles:** LinkedIn: "the most common silent error in group statistics", with the Oceania numbers. X: "Average life expectancy in Oceania: 72.95 or 78.74? Depends whether Tonga counts as much as Australia."
+
+### PL-020: "Temperature 0" stopped being a setting for one of the free models
+- **Step:** 2
+- **What happened:** The plan said every SQL call runs at temperature 0, so the same question gives the same query. Checking the providers before writing the code (the verify-first rule) showed that Google's documentation for Gemini 3.5 Flash-Lite lists temperature as deprecated and ignored, and that the Gemini 3 guidance is to leave it at its default. Gemini 3 models also "think" before answering, and that thinking cannot be switched off, so it uses part of the output allowance. Emolé now sends temperature 0 to Ollama and Groq only, never to Gemini, and gives hosted models at least 2,048 output tokens so the SQL is never cut off after the thinking.
+- **Real numbers:** 1 of 3 planned providers ignores temperature; output cap 400 tokens for Ollama, at least 2,048 for hosted models. Whether Gemini still returns the same SQL for the same question is measured in Step 3 (repeat runs).
+- **Why it matters:** "deterministic" has to be earned by the design (checks, code-computed numbers), not by one sampling setting a provider can retire.
+- **Evidence:** `src/emole/config.py` (`PROVIDERS`, `HOSTED_MIN_TOKENS`); `tests/test_llm.py::test_gemini_request_shape`; Google's "What's new in Gemini 3.6 Flash and 3.5 Flash-Lite" page (checked 23 November 2026).
+- **Angles:** LinkedIn: what "deterministic AI" means when providers change the knobs. X: "Planned temperature 0. One model now ignores temperature. The determinism has to live in the code."
+
+### PL-021: The SQL prompt was measured, not cut
+- **Step:** 2
+- **What happened:** The prompt that turns a question into SQL holds Emolé's identity, 12 SQL rules, the description of every column, the data facts measured live from the database, and 22 worked examples written for this data. Following the owner's rule that SQL quality beats prompt size, it was measured and kept whole. Ollama's context window was set to 12,288 tokens (the earlier build used 8,192) so the local model never silently drops the middle of the prompt.
+- **Real numbers:** 46 messages, 18,044 characters, about 4,500 tokens by the characters-divided-by-4 estimate. The exact counts per model are reported by the providers on the owner's smoke runs (to be recorded in the Step 2 close-out).
+- **Why it matters:** a prompt trimmed to fit a free tier can quietly lose the one example that teaches group maths. Measure first, then decide with numbers.
+- **Evidence:** `python scripts/prompt_size.py`; `src/emole/pipeline/prompts.py`; `tests/test_prompts.py::test_worked_examples_run_and_pass_the_checks` (every example runs on the real table).
+- **Angles:** LinkedIn: prompt size against accuracy, decided by measurement. X: "My SQL prompt is about 4,500 tokens. I measured it. I did not cut it."
+
+### PL-022: "Nigerian" was read as Niger
+- **Step:** 2
+- **What happened:** Emolé matches place names in code before any model call, including adjectives ("Nigerian inflation", "Ghanaian GDP"). The first version stripped endings from longest to shortest, so "Nigerian" lost "-ian" first and became "Niger", a different country. Trying the shortest ending first ("Nigerian" minus "n" = "Nigeria") fixed it, and a test now pins it.
+- **Real numbers:** 1 wrong country from 1 adjective, found in a manual check of 5 adjectives before any test was written; 5 of 5 correct after the fix (Nigerian, Kenyan, Ghanaian, Senegalese, Egyptian).
+- **Why it matters:** with countries named Niger and Nigeria, or Guinea and Guinea-Bissau, a name matcher needs tests as much as SQL does.
+- **Evidence:** `src/emole/pipeline/names.py::_demonym`; `tests/test_names.py::test_adjectives_mean_places`.
+- **Angles:** LinkedIn: small bugs with big consequences in country data. X: "My name matcher turned Nigerians into Nigeriens. One test later, fixed."
+
+### PL-023: The safety check blocked every correct group question
+- **Step:** 2
+- **What happened:** The query safety check asks DuckDB's own parser which tables a query reads, so only `country_year` is allowed. In the first end-to-end run (real table, stand-in model), every group question failed with "pop_avg does not exist". The parser was being asked on a blank, in-memory connection that did not know Emolé's group-maths macros, so it rejected the correct queries. The check now uses the same read-only connection that runs the query.
+- **Real numbers:** 2 of 15 smoke questions failed before the fix (the West Africa question and the continents question, the two that used a macro); 0 after. Found by the stand-in run, before any real model was involved.
+- **Why it matters:** a safety layer that blocks correct answers gets switched off by frustrated users. Test the guard with the queries you want to allow, not only the ones you want to block.
+- **Evidence:** `src/emole/pipeline/executor.py::validate` (the `con` argument); `tests/test_executor.py::test_with_select_and_group_macros_work`.
+- **Angles:** LinkedIn: "security that breaks the product is not security". X: "My SQL firewall rejected the correct answers. Here is why."
+
+### PL-024: The fallback chain, tested down to the HTTP level
+- **Step:** 2
+- **What happened:** Emolé can use several free hosted models in a chain. When one says "too many requests" (HTTP 429), it rests for the time the provider asks for and the next one answers. A pretend web server played Groq and Gemini: the first answered 429 with "retry after 7 seconds", the second answered. Emolé switched, recorded which provider answered, and marked the first as resting for exactly 7 seconds. A second rule came from testing local mode: a resting provider is now tried last instead of never, so if Ollama was not running, starting it fixes the next question at once instead of a minute later.
+- **Real numbers:** 1 rate-limited call, 1 fallback, 7-second rest honoured; 10 provider-chain tests offline. The real forced failure (a wrong model name on Groq, then Gemini answering) runs on the owner's laptop.
+- **Why it matters:** free tiers are shared by every visitor. A demo that falls over at the first 429 is not a demo.
+- **Evidence:** `src/emole/pipeline/llm.py` (`chat`, `ProviderError`); `tests/test_llm.py`; the forced-failure smoke log (`logs/smoke_forced_*.md`, owner's run).
+- **Angles:** LinkedIn: designing for free-tier limits. X: "429 from provider 1. Provider 2 answered. The user never knew."
+
+### PL-025: Emolé got a nickname
+- **Step:** 2 (decided in the Step 1 close-out)
+- **What happened:** Emolé (said "ee-maw-leh", inspired by the Yoruba word for light) is hard for some people to say. She now introduces herself with a nickname: "I'm Emolé, an expert on Movement, Output, Life and Energy. You can call me Immy." She answers to Emolé, Emole and Immy. The introduction and the greetings are written by code, not by the model, so they never vary and cost no model call.
+- **Real numbers:** 0 model calls for greetings, "who are you" and opinion requests (tested).
+- **Why it matters:** a name people can say is a name people will use. Keeping the fixed first sentence protects the recorded introduction planned for the website.
+- **Evidence:** `src/emole/pipeline/prompts.py` (`INTRODUCTION`); `src/emole/pipeline/responder.py` (`chat_answer`); `tests/test_responder.py::test_identity_and_opinion_are_answered_in_code`.
+- **Angles:** LinkedIn: naming an AI product for a global audience while keeping its roots. X: "Her name is Emolé. You can call her Immy."

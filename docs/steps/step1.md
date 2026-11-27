@@ -3,7 +3,7 @@
 **Date:** 8 November 2026. **Branch:** `step-01-foundations-data`. **Tag after merge:** `v0.1.0-step1`.
 
 Sir, this guide takes you from an empty folder to a GitHub repo with a working data
-pipeline. Read Part 0 and Part 1 first; Part 3 is the hands-on walkthrough.
+pipeline. Read Part 0 and Part 1 first; Part 3 is the hands-on walkthrough..
 
 ---
 
@@ -17,7 +17,7 @@ pipeline. Read Part 0 and Part 1 first; Part 3 is the hands-on walkthrough.
 - `python scripts/coverage_report.py`: writes `docs/coverage_report.md` (per column, per peer country, per region and bloc) and flags columns to review using a rule written before any real data was seen.
 - `src/emole/groupmath.py`: the group maths (sum, population-weighted, GDP-weighted, median) with coverage notes, in Python AND as SQL, proven to agree. Step 2 uses it.
 - `docs/DATA.md` (data dictionary), `docs/PROJECT_STATE.md` (rewritten in full), `docs/POST_LOG.md` (13 entries), this guide.
-- A secrets check that blocks API-key-shaped strings before any commit.
+- A secrets check that blocks API-key-shaped strings before any commit..
 
 **What I tested (Linux, Python 3.11, the same library versions you will install)**
 

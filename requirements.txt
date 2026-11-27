@@ -1,4 +1,4 @@
-# Emolé requirements for Step 1: the data pipeline, tests and code checks.
+# Emolé requirements: the data pipeline (Step 1), the engine (Step 2), tests and code checks.
 # Exact versions, so every machine (your laptop, CI, Docker later) builds the same thing.
 # Heavier libraries (model clients, Whisper, Kokoro, MLflow, FastAPI) are added in the
 # steps that need them, never before.
@@ -10,6 +10,13 @@ numpy==2.4.6
 pyarrow==26.0.1        # Parquet files (the committed snapshot)
 requests==2.34.2
 PyYAML==6.0.3          # reads data/sources.yaml and data/reference/blocs.yaml
+
+# --- The engine (Step 2) ---
+openai==3.57.0         # the OpenAI-compatible request format, used for Groq and Gemini (not OpenAI itself)
+ollama==0.6.3          # local models on your laptop
+python-dotenv==1.2.4   # reads keys from .env (never printed, never committed)
+plotly==6.9.0          # interactive charts (same version the earlier build ran with)
+matplotlib==3.10.9     # chart pictures (PNG)
 
 # --- Tests and code checks ---
 pytest==9.2.0

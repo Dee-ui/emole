@@ -246,7 +246,7 @@ All lists live in `data/reference/blocs.yaml`, with their "as of" date (8 Novemb
 | `is_g20` | 19 | The 19 country members. The G20 also has two union members, the EU and the African Union; they are not countries, so use `is_eu` and `is_african_union` for them. |
 | `is_middle_east` | 16 | Emolé's own list, below. |
 
-### 4.4 Emolé's Middle East (decision E-07, E-42)
+### 4.4 Emolé's Middle East (decision E-07, E-42; approved by the owner on 23 November 2026)
 No single official list exists. Emolé uses the common core found in most news and reference works:
 
 **Bahrain, Egypt, Iran, Iraq, Israel, Jordan, Kuwait, Lebanon, Oman, Palestine, Qatar, Saudi Arabia, Syria, Turkiye, United Arab Emirates, Yemen** (16).
@@ -254,7 +254,9 @@ No single official list exists. Emolé uses the common core found in most news a
 Left out on purpose: Cyprus (an EU member, usually grouped with Europe); Armenia, Azerbaijan and Georgia (in the UN's "Western Asia" but usually called the South Caucasus); and the Maghreb (Morocco, Algeria, Tunisia, Libya), which belong to "Middle East and North Africa" but not the Middle East itself. When asked, Emolé says which definition she used and can offer the UN one (`subregion = 'Western Asia'`) or the World Bank region instead.
 
 ### 4.5 Countries and territories
-Rows are kept for every code that is a real country or territory, the way the World Bank does (Hong Kong, Puerto Rico, Greenland and so on are rows). Territories have fewer columns filled. A ranking of "countries" may therefore include a territory; Step 2 decides whether rankings should skip rows with no `income_group` or similar.
+Rows are kept for every code that is a real country or territory, the way the World Bank does (Hong Kong, Puerto Rico, Greenland and so on are rows). Territories have fewer columns filled.
+
+**Rankings (decided in Step 2, E-69):** a ranking of "countries" includes territories, as the World Bank's own rankings include economies such as Hong Kong and Macao. Every ranked row shows its name, so a territory is never hidden inside a number. Step 3's test set checks whether this confuses answers; if it does, rankings can skip the 21 rows with no World Bank region.
 
 ---
 
@@ -270,6 +272,24 @@ Emolé never lets the model invent group maths. A group figure (region, bloc, in
 | `median` | the middle country's value | inflation_cpi_pct |
 
 Why weights matter, in one example: with a plain average, Cape Verde (about half a million people) would count as much as Nigeria (over 200 million).
+
+Measured on the real table (23 November 2026), plain average against population-weighted average:
+
+| Group and year | Measure | Plain average | Population-weighted | Countries used |
+|---|---|---|---|---|
+| Oceania, 2023 | life expectancy (years) | 72.95 | 78.74 | 19 of 23 |
+| Africa, 2023 | life expectancy (years) | 66.22 | 64.21 | 54 of 58 |
+| Western Africa, 2024 | electricity access (%) | 57.89 | 60.33 | 16 of 17 |
+
+In Oceania, a dozen small Pacific islands outweigh Australia in a plain average; weighted, Australia's 27 million people count for what they are.
+
+**In the database (Step 2, BUILD_VERSION 2):** the two weighted rules are stored as DuckDB macros, so a query can call them by name and the maths is written only once, in `groupmath.py`:
+
+- `pop_avg(column)` = the population-weighted average (only countries with both the value and a population)
+- `gdp_avg(column)` = the GDP-weighted average (only countries with the value, a population and GDP per person)
+- `pop_avg(air_passengers / population)` = passengers per person for a group: total passengers divided by total population, over the same countries
+
+The engine's group-maths check (`src/emole/pipeline/checks.py`) replaces a plain `AVG()` across countries with the column's rule before the query runs, and every group answer ends with a coverage note written by code ("based on 16 of 17 Western Africa countries with data for 2024"). A country counts as "with data" only if it has the value AND its weight, which is why, for example, Europe's 2023 life expectancy uses 47 of its 51 rows: Guernsey, Jersey and the Vatican have a life expectancy but no World Bank population figure, and the Channel Islands row (`CHI`) has a population but no life expectancy (OWID reports Guernsey and Jersey separately).
 
 Where population weighting is only approximate (written in `column_meta.weight_note`): unemployment (true weight: labour force), under-five deaths (true weight: births), renewables share (true weight: electricity generated), life expectancy (true figure needs life tables).
 
@@ -347,3 +367,4 @@ For example: `International Civil Aviation Organization (ICAO), via Our World in
 |---|---|---|
 | 8 Nov 2026 | 1 | First version: 17 columns checked, groupings, blocs, Middle East list, group maths, snapshot, credits. Measured years to be confirmed from the first real build. |
 | 18 Nov 2026 | 1 (close-out) | First real build recorded; coverage review (3.1, nothing dropped); air freight scaled from tonne-km to million tonne-km; Channel Islands given a region; 21 territories without a World Bank group listed; new removal reason and real removal counts (6); OWID format note (6.1). |
+| 23 Nov 2026 | 2 | Middle East list approved (4.4); territories stay in rankings (4.5); plain against weighted averages measured, and the `pop_avg` and `gdp_avg` macros (5). |

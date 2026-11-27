@@ -23,7 +23,7 @@ from pathlib import Path
 import duckdb
 import pandas as pd
 
-from emole import config
+from emole import config, groupmath
 from emole.data import fetch
 from emole.data.groups import build_groups, load_regions
 from emole.data.parse import ParseError, parse_owid, parse_wb_countries, parse_wb_indicator
@@ -199,6 +199,8 @@ def write_database(wide, meta, info, db_path: Path) -> Path:
         flat = [(k, json.dumps(v) if isinstance(v, (dict, list)) else str(v)) for k, v in info.items()]
         con.execute("CREATE TABLE build_info (key VARCHAR, value VARCHAR)")
         con.executemany("INSERT INTO build_info VALUES (?, ?)", flat)
+        for macro in groupmath.SQL_MACROS.values():    # the group maths, by name (Step 2)
+            con.execute(macro)
     finally:
         con.close()
     try:

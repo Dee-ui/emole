@@ -21,8 +21,11 @@ because without the weight it cannot be included in a weighted average.
 
 Two ways to use it:
   group_value(...)      in Python (tests, coverage report, checks)
-  sql_expression(...)   the same maths as a DuckDB SQL expression (Step 2's SQL rules
-                        and instant fixes). The tests prove both give the same number.
+  sql_expression(...)   the same maths as a DuckDB SQL expression. The tests prove both
+                        give the same number.
+  SQL_MACROS            the two weighted rules stored IN the database as macros
+                        (Step 2), so the model writes pop_avg(internet_users_pct) and
+                        gdp_avg(gdp_growth_pct) instead of the long FILTER form.
 """
 from dataclasses import dataclass, field
 
@@ -114,3 +117,15 @@ def sql_coverage(column: str, rule: str) -> str:
         return (f"COUNT(*) FILTER (WHERE {column} IS NOT NULL AND population > 0 "
                 "AND gdp_per_capita_ppp > 0)")
     return f"COUNT({column})"
+
+
+# Stored in the database by the build (BUILD_VERSION 2). A macro is a named formula:
+# pop_avg(internet_users_pct) is replaced by the full expression above before the
+# query runs, so the maths is written once, here, and the model cannot get the
+# FILTER clauses wrong. pop_avg(air_passengers / population) gives passengers per
+# person for a group: sum of passengers divided by sum of population, same countries.
+SQL_MACROS = {
+    "pop_avg": f"CREATE MACRO pop_avg(v) AS {sql_expression('v', 'pop_weighted')}",
+    "gdp_avg": f"CREATE MACRO gdp_avg(v) AS {sql_expression('v', 'gdp_weighted')}",
+}
+RULE_FUNCTION = {"sum": "SUM", "pop_weighted": "pop_avg", "gdp_weighted": "gdp_avg", "median": "MEDIAN"}
