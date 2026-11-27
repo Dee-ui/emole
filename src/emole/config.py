@@ -40,7 +40,8 @@ COVERAGE_REPORT = DOCS_DIR / "coverage_report.md"
 # Bump this whenever the cleaning or joining code changes, so everyone can tell
 # which rules built a given snapshot. It is saved inside the database and snapshot.
 #   1: first build (Step 1)
-BUILD_VERSION = 1
+#   2: the database also holds the group-maths macros pop_avg() and gdp_avg() (Step 2)
+BUILD_VERSION = 2
 
 # Years kept in country_year (decision E-43). 1970 is where the aviation series
 # start. Nothing after the current year is kept, so projections can never slip in.
@@ -92,3 +93,98 @@ RECENT_YEARS = 5
 # Example: Ember's 2025 electricity data covers far fewer countries than 2024, so
 # for rankings and group answers 2024 is the fairer "latest".
 BROAD_COVERAGE_SHARE = 0.80
+
+
+# ===========================================================================
+# STEP 2: THE ENGINE
+# ===========================================================================
+# Keys and personal settings live in .env (git-ignored). This reads it once, here,
+# so every part of Emolé sees the same values. A key is NEVER printed or logged:
+# code only ever says whether a key is present.
+def _load_env_file() -> None:
+    try:
+        from dotenv import load_dotenv
+    except ImportError:                           # the data build does not need it
+        return
+    load_dotenv(PROJECT_ROOT / ".env", override=False)
+
+
+_load_env_file()
+
+# ---------------------------------------------------------------------------
+# MODE (Context 6.2): local = your laptop, team = inside an organisation,
+# public = the free demo on the internet. Set EMOLE_MODE in .env.
+# ---------------------------------------------------------------------------
+MODES = ("local", "team", "public")
+EMOLE_MODE = os.environ.get("EMOLE_MODE", "local").strip().lower() or "local"
+
+# ---------------------------------------------------------------------------
+# MODEL PROVIDERS
+# ---------------------------------------------------------------------------
+# One entry per provider. "openai" kind = called through the OpenAI-compatible format,
+# so a provider is just a web address, a key and a model name.
+#   temperature: False for Gemini. Google's Gemini 3 guidance is to leave temperature at
+#   its default, and from Gemini 3.5 Flash-Lite on the API ignores it (decision E-63).
+PROVIDERS = {
+    "ollama": {"kind": "ollama", "host": os.environ.get("OLLAMA_HOST") or "http://127.0.0.1:11434"},
+    "groq": {"kind": "openai", "base_url": "https://api.groq.com/openai/v1",
+             "key_env": "GROQ_API_KEY", "temperature": True},
+    "gemini": {"kind": "openai", "base_url": "https://generativelanguage.googleapis.com/v1beta/openai/",
+               "key_env": "GEMINI_API_KEY", "temperature": False},
+    "openrouter": {"kind": "openai", "base_url": "https://openrouter.ai/api/v1",
+                   "key_env": "OPENROUTER_API_KEY", "temperature": True},
+}
+
+OLLAMA_MODEL = "qwen2.5:7b-instruct"
+
+# The chain: tried in order; a provider that is busy, out of quota, too slow or broken
+# is skipped for a while and the next one answers. Format "provider:model".
+# Override it in .env, for example:
+#   EMOLE_PROVIDER_CHAIN=groq:openai/gpt-oss-120b,gemini:gemini-3.5-flash-lite
+# Step 3's evaluation decides the final order (accuracy first, then speed; E-12).
+DEFAULT_CHAINS = {
+    "local": [f"ollama:{OLLAMA_MODEL}"],
+    "team": [f"ollama:{OLLAMA_MODEL}"],
+    "public": ["groq:openai/gpt-oss-120b",
+               "gemini:gemini-3.5-flash-lite",
+               "gemini:gemini-3.1-flash-lite"],
+}
+PROVIDER_CHAIN = [p.strip() for p in os.environ.get("EMOLE_PROVIDER_CHAIN", "").split(",") if p.strip()]
+
+LLM_TIMEOUT_SEC = 180         # Ollama on a laptop CPU can be slow on the first call
+HOSTED_TIMEOUT_SEC = 30       # a hosted provider slower than this is skipped for the next one
+MAX_SQL_TOKENS = 400          # cap on SQL length (a model can never ramble forever)
+MAX_ANSWER_TOKENS = 150       # cap on the answer sentence
+# Hosted "thinking" models (Gemini 3.x) spend part of the output budget thinking before
+# they answer, and that thinking cannot be switched off. Their caps are raised to this,
+# so the SQL is never cut off half-way. The answer is still checked as usual.
+HOSTED_MIN_TOKENS = 2048
+RATE_LIMIT_COOLDOWN_SEC = 60  # skip a provider this long after "too many requests" or a timeout
+ERROR_COOLDOWN_SEC = 600      # ... and this long after a broken key or a wrong model name
+SQL_REPAIR_ATTEMPTS = 1       # if the SQL fails a check or errors, the model may fix it once
+
+# ---------------------------------------------------------------------------
+# SPEED (kept from the earlier build; they apply to Ollama)
+# ---------------------------------------------------------------------------
+# Every Ollama call asks for the SAME context size. Too small and Ollama silently cuts
+# the middle out of a long prompt; a different size on each call makes it reload the
+# model. Emolé's SQL prompt is measured in the guide (decision E-13: measured, not cut).
+LLM_NUM_CTX = 12288
+LLM_KEEP_ALIVE = "60m"        # keep the model loaded between questions
+LLM_NUM_THREAD = 0            # 0 = Ollama decides
+LLM_WARM_UP = True            # load the model and read the SQL prompt once at start
+QUICK_ANSWERS = True          # one-number answers get a fixed sentence, no model call
+ANSWER_CACHE_SIZE = 200       # used by the website (Step 4)
+SPEED_LOG = True              # print a "[speed]" line after every question
+
+# ---------------------------------------------------------------------------
+# ANSWERS, LOGS AND CHARTS
+# ---------------------------------------------------------------------------
+MAX_ROWS = 5000               # never pull more rows than this into memory
+RANKING_LIMIT = 10            # "top countries" without a number means the top 10
+MAX_HISTORY_TURNS = 3         # earlier questions remembered for follow-ups
+SHOW_SQL = True               # show the SQL in the terminal chat
+LOG_QUERIES = True            # save question, SQL, timing and provider (never result rows)
+CHART_DIR = PROJECT_ROOT / "charts"          # git-ignored
+LABEL_UNIT_MODE = "per_value"                # chart labels: 950, 54.3k, 1.2M ...
+LABEL_DECIMALS = 1

@@ -3,6 +3,7 @@ import duckdb
 import pandas as pd
 import pytest
 
+from emole import config, groupmath
 from emole.data.build import read_snapshot, run
 
 from .conftest import RAW, SOURCES
@@ -94,9 +95,18 @@ def test_database_is_written_and_readable(built):
         assert {"country_year", "column_meta", "build_info"} <= tables
         n = con.execute("SELECT COUNT(*) FROM country_year").fetchone()[0]
         version = con.execute("SELECT value FROM build_info WHERE key = 'build_version'").fetchone()[0]
+        # Step 2: the group-maths macros are stored in the database and give exactly
+        # the same numbers as the long SQL form from groupmath.sql_expression
+        by_macro = con.execute("SELECT pop_avg(internet_users_pct), gdp_avg(gdp_growth_pct) "
+                               "FROM country_year WHERE year = 2023").fetchone()
+        by_text = con.execute(
+            f"SELECT {groupmath.sql_expression('internet_users_pct', 'pop_weighted')}, "
+            f"{groupmath.sql_expression('gdp_growth_pct', 'gdp_weighted')} "
+            "FROM country_year WHERE year = 2023").fetchone()
     finally:
         con.close()
-    assert n == len(EXPECTED_ROWS) and version == "1"
+    assert n == len(EXPECTED_ROWS) and version == str(config.BUILD_VERSION)
+    assert by_macro == by_text
 
 
 def test_snapshot_rebuild_gives_the_same_table(built, tmp_path):
